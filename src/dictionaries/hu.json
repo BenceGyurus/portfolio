@@ -1,0 +1,142 @@
+{
+  "hero": {
+    "title": "Gyürüs Bence",
+    "subtitle1": "Mérnökinformatikus hallgató",
+    "description": "Mérnökinformatikus hallgatóként fő érdeklődési köröm a robusztus szoftverek és a megbízható infrastruktúrák építése. A kódolás mellett aktívan foglalkozom szerverek üzemeltetésével: egy saját otthoni szervert, valamint egy barátommal közösen egy 3 node-ból álló clustert is menedzselek.",
+    "locationLabel": "Hely:",
+    "location": "Budapest",
+    "educationLabel": "Tanulmányok:",
+    "education": "BME VIK",
+    "focusLabel": "Jelenlegi fókusz:",
+    "focuses": ["Infrastruktúra", "Hálózatok", "Saját szerver"]
+  },
+  "statusAndNow": {
+    "statusLabel": "Rendszer Állapot",
+    "statusAvailable": "Nyitott munkalehetőségekre",
+    "nowLabel": "Most",
+    "nowReading": "Olvasom",
+    "readingTitle": "Computer Networking A Top-Down Approach",
+    "nowLearning": "Tanulom",
+    "learningTitle": "Go & Kubernetes",
+    "nowBuilding": "Építem",
+    "buildingTitle": "Matekgyakorló"
+  },
+  "currentFocus": {
+    "title": "Jelenleg ezen dolgozom",
+    "items": [
+      {
+        "title": "irodalomerettsegi.hu",
+        "desc": "Sablon-alapú tanulási platform.",
+        "role": "Frontend Fejlesztő"
+      },
+      {
+        "title": "Matekgyakorló",
+        "desc": "Sablon-alapú matematikai gyakorló oldal.",
+        "role": "Fejlesztő"
+      },
+      {
+        "title": "HomeLab",
+        "desc": "Saját Proxmox/Docker infrastruktúra.",
+        "role": "Karbantartó"
+      },
+      {
+        "title": "KSZK Infrastruktúra",
+        "desc": "Egyetemi kollégiumi hálózat és szolgáltatások.",
+        "role": "Segédrendszergazda"
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projektek",
+    "status": "Állapot",
+    "active": "Aktív",
+    "inDevelopment": "Fejlesztés alatt",
+    "description": "Leírás",
+    "role": "Szerepkör",
+    "responsibilities": "Felelősségek",
+    "links": "Linkek",
+    "architecture": "Architektúra",
+    "runningServices": "Futó szolgáltatások",
+    "focus": "Fókusz",
+    "website": "Weboldal",
+    "project1": {
+      "desc": "Sablon-alapú tanulási platform, amely egy adathalmazból generál feladatokat, hogy segítsen a diákoknak hatékonyan felkészülni az irodalom érettségire.",
+      "role": "Frontend Fejlesztő & Üzemeltető",
+      "resps": ["Frontend fejlesztés", "Fizikai infrastruktúra üzemeltetése"]
+    },
+    "project2": {
+      "desc": "2023 óta épülő saját infrastruktúra tanuláshoz, kísérletezéshez és szolgáltatások megbízható futtatásához (kezdetben TrueNAS, majd 2025-től Proxmox alapokon)."
+    },
+    "project3": {
+      "title": "Matekgyakorló",
+      "desc": "Sablon-alapú platform, amely véletlenszerű számokkal generál feladatokat, segítve a diákok matematikai készségeinek gyakorlását.",
+      "focus1": "Végtelen feladatgenerálás",
+      "focus2": "Azonnali értékelés",
+      "focus3": "Lépésenkénti levezetések"
+    },
+    "homelabNodes": {
+      "networking": "Hálózat & Proxy",
+      "containers": "Konténer Hosztok",
+      "kubernetes": "Kubernetes Cluster",
+      "services": "Egyéb Szolgáltatások",
+      "nodes": {
+        "loadbalancer": { "id": "600", "name": "loadbalancer", "desc": "Belépési pont, Traefik reverse proxy" },
+        "cloudflare": { "id": "106", "name": "cloudflare-tunnel", "desc": "LXC konténer Cloudflare alagútnak" },
+        "adguard": { "id": "104", "name": "adguard-home", "desc": "DNS szerver, 99-es VLAN (biztonságos)" },
+        "vpn": { "id": "113", "name": "vpn", "desc": "Tailscale hozzáférési pont" },
+        "unifi": { "id": "105", "name": "unifi", "desc": "Unifi controller (inaktív)" },
+        "dockerMain": { "id": "103", "name": "docker-vm", "desc": "Fő Docker hoszt (4TB). Stateful szolgáltatások: Immich, Seafile, Paperless, Authentik stb. Dedikált Traefik." },
+        "docker2": { "id": "112", "name": "docker2", "desc": "Stateless appok (Grafana, Prometheus, Monitoring)" },
+        "k8sCp": { "id": "120", "name": "talos-controlplane", "desc": "Bare-metal K8s Control Plane" },
+        "k8sWorker": { "id": "121", "name": "talos-worker", "desc": "Bare-metal K8s Worker Node" },
+        "hass": { "id": "780", "name": "Home-Assistant", "desc": "Home Assistant OS" },
+        "minecraft": { "id": "102", "name": "minecraft", "desc": "Crafty controller (MC szerverek)" },
+        "maildrop": { "id": "107", "name": "mail-drop-server", "desc": "Maildrop szolgáltatás & DDNS updater" }
+      }
+    }
+  },
+  "infrastructure": {
+    "title": "Infrastruktúra",
+    "currentStack": "Jelenlegi Stack",
+    "linuxDesc": "Debian és Ubuntu Szerver",
+    "dockerDesc": "Konténerizáció és Compose",
+    "traefikDesc": "Reverse Proxy és Let's Encrypt",
+    "proxmoxDesc": "Type-1 Hypervisor",
+    "prometheusDesc": "Metrikák és Megfigyelhetőség",
+    "andMore": "+ sok más...",
+    "tailscaleDesc": "Zero-trust Mesh VPN"
+  },
+  "openSource": {
+    "title": "Nyílt forráskód",
+    "noRepos": "// Jelenleg nem sikerült betölteni a tárolókat."
+  },
+  "techStack": {
+    "title": "Technológiai Stack",
+    "basics": "Alapok"
+  },
+  "experience": {
+    "title": "Tapasztalat",
+    "exp1": {
+      "year": "Ma",
+      "title": "Projektek és Infrastruktúra Építése",
+      "desc": "Egy Matekgyakorló oldal fejlesztése és a saját HomeLab üzemeltetése."
+    },
+    "exp2": {
+      "year": "2025 - Jelenleg",
+      "title": "KSZK - Segédrendszergazda",
+      "desc": "Segédkezés az egyetemi kollégiumi hálózat és infrastrukturális szolgáltatások üzemeltetésében."
+    },
+    "exp3": {
+      "year": "2024 - Jelenleg",
+      "title": "BME VIK - Mérnökinformatikus",
+      "desc": "Egyetemi tanulmányok kezdete, fókuszban a szoftverfejlesztés és a rendszerek."
+    }
+  },
+  "blog": {
+    "title": "Írások",
+    "comingSoon": "Hamarosan."
+  },
+  "contact": {
+    "title": "Építsünk valamit együtt."
+  }
+}

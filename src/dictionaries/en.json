@@ -1,0 +1,142 @@
+{
+  "hero": {
+    "title": "Bence Gyürüs",
+    "subtitle1": "Computer Engineer",
+    "description": "As a Computer Engineering student, my primary focus is building robust software and reliable infrastructure. Beyond coding, I actively manage servers: I run a personal home server and co-maintain a 3-node cluster with a friend.",
+    "locationLabel": "Location:",
+    "location": "Budapest",
+    "educationLabel": "Education:",
+    "education": "BME VIK",
+    "focusLabel": "Current focus:",
+    "focuses": ["Infrastructure", "Networking", "Self Hosting"]
+  },
+  "statusAndNow": {
+    "statusLabel": "System Status",
+    "statusAvailable": "Available for jobs",
+    "nowLabel": "Now",
+    "nowReading": "Reading",
+    "readingTitle": "Computer Networking A Top-Down Approach",
+    "nowLearning": "Learning",
+    "learningTitle": "Go & Kubernetes",
+    "nowBuilding": "Building",
+    "buildingTitle": "Math Practice Platform"
+  },
+  "currentFocus": {
+    "title": "Currently working on",
+    "items": [
+      {
+        "title": "irodalomerettsegi.hu",
+        "desc": "Template-based learning platform.",
+        "role": "Frontend Developer"
+      },
+      {
+        "title": "Math Practice Platform",
+        "desc": "Template-based math practice site.",
+        "role": "Core Contributor"
+      },
+      {
+        "title": "HomeLab",
+        "desc": "Personal Proxmox/Docker infrastructure.",
+        "role": "Maintainer"
+      },
+      {
+        "title": "KSZK Infrastructure",
+        "desc": "University dorm network & services.",
+        "role": "Assistant System Administrator"
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "status": "Status",
+    "active": "Active",
+    "inDevelopment": "In Development",
+    "description": "Description",
+    "role": "Role",
+    "responsibilities": "Responsibilities",
+    "links": "Links",
+    "architecture": "Architecture",
+    "runningServices": "Running services",
+    "focus": "Focus",
+    "website": "Website",
+    "project1": {
+      "desc": "Template-based learning platform that generates tasks from a dataset to help students prepare for their literature matriculation exams efficiently.",
+      "role": "Frontend Developer & System Admin",
+      "resps": ["Frontend development", "Physical infrastructure management"]
+    },
+    "project2": {
+      "desc": "Personal infrastructure built since 2023 for learning, experimenting, and hosting services reliably (started with TrueNAS, migrated to Proxmox in 2025)."
+    },
+    "project3": {
+      "title": "Math Practice Platform",
+      "desc": "Template-based platform that generates math problems using random numbers, helping students practice and improve their skills.",
+      "focus1": "Infinite Task Generation",
+      "focus2": "Instant Feedback",
+      "focus3": "Step-by-step Solutions"
+    },
+    "homelabNodes": {
+      "networking": "Networking & Proxy",
+      "containers": "Container Hosts",
+      "kubernetes": "Kubernetes Cluster",
+      "services": "Other Services",
+      "nodes": {
+        "loadbalancer": { "id": "600", "name": "loadbalancer", "desc": "Entry point, Traefik reverse proxy" },
+        "cloudflare": { "id": "106", "name": "cloudflare-tunnel", "desc": "LXC container for Cloudflare tunnel" },
+        "adguard": { "id": "104", "name": "adguard-home", "desc": "DNS server, VLAN 99 (secure network)" },
+        "vpn": { "id": "113", "name": "vpn", "desc": "Tailscale access point" },
+        "unifi": { "id": "105", "name": "unifi", "desc": "Unifi controller (inactive)" },
+        "dockerMain": { "id": "103", "name": "docker-vm", "desc": "Main Docker host (4TB). Stateful apps: Immich, Seafile, Paperless, Authentik, etc. Dedicated Traefik." },
+        "docker2": { "id": "112", "name": "docker2", "desc": "Stateless apps (Grafana, Prometheus, Monitoring)" },
+        "k8sCp": { "id": "120", "name": "talos-controlplane", "desc": "Bare-metal K8s Control Plane" },
+        "k8sWorker": { "id": "121", "name": "talos-worker", "desc": "Bare-metal K8s Worker Node" },
+        "hass": { "id": "780", "name": "Home-Assistant", "desc": "Home Assistant OS" },
+        "minecraft": { "id": "102", "name": "minecraft", "desc": "Crafty controller (MC servers)" },
+        "maildrop": { "id": "107", "name": "mail-drop-server", "desc": "Maildrop service & DDNS updater" }
+      }
+    }
+  },
+  "infrastructure": {
+    "title": "Infrastructure",
+    "currentStack": "Current Stack",
+    "linuxDesc": "Debian & Ubuntu Server",
+    "dockerDesc": "Containerization & Compose",
+    "traefikDesc": "Reverse Proxy & Let's Encrypt",
+    "proxmoxDesc": "Type-1 Hypervisor",
+    "prometheusDesc": "Metrics & Observability",
+    "andMore": "+ and many more...",
+    "tailscaleDesc": "Zero-trust Mesh VPN"
+  },
+  "openSource": {
+    "title": "Open Source",
+    "noRepos": "// Could not load repositories at this time."
+  },
+  "techStack": {
+    "title": "Tech Stack",
+    "basics": "Familiar with"
+  },
+  "experience": {
+    "title": "Experience",
+    "exp1": {
+      "year": "Today",
+      "title": "Building Projects & Infrastructure",
+      "desc": "Working on a Math Practice Platform and managing personal HomeLab."
+    },
+    "exp2": {
+      "year": "2025 - Present",
+      "title": "KSZK - Assistant System Administrator",
+      "desc": "Assisting with university dormitory network and infrastructure services."
+    },
+    "exp3": {
+      "year": "2024 - Present",
+      "title": "BME VIK - Computer Engineering",
+      "desc": "Started university studies, focusing on software engineering and systems."
+    }
+  },
+  "blog": {
+    "title": "Writing",
+    "comingSoon": "Coming soon."
+  },
+  "contact": {
+    "title": "Let's build something."
+  }
+}
