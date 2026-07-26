@@ -1,6 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
-import { Mail, FileText } from "lucide-react";
-import { GithubIcon } from "@/components/Icons";
+import { Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 import Link from "next/link";
 
 export function Hero({ dict }: { dict: any }) {
@@ -23,11 +23,11 @@ export function Hero({ dict }: { dict: any }) {
             <GithubIcon className="mr-2 h-4 w-4" />
             GitHub
           </Link>
-          <Link href="/resume.pdf" target="_blank" className={buttonVariants({ variant: "outline" })}>
-            <FileText className="mr-2 h-4 w-4" />
-            Resume
+          <Link href="https://www.linkedin.com/in/bence-gy%C3%BCr%C3%BCs-42ab05422" target="_blank" className={buttonVariants({ variant: "outline" })}>
+            <LinkedinIcon className="mr-2 h-4 w-4" />
+            LinkedIn
           </Link>
-          <Link href="mailto:contact@example.com" className={buttonVariants({ variant: "outline" })}>
+          <Link href="mailto:gyurus.bence@gmail.com" className={buttonVariants({ variant: "outline" })}>
             <Mail className="mr-2 h-4 w-4" />
             Email
           </Link>

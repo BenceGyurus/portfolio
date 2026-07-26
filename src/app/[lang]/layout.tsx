@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bence Gyürüs | Infrastructure Engineer",
-  description: "Personal profile and portfolio of Bence Gyürüs, Computer Science Student and Infrastructure Engineer.",
+  title: "Bence Gyürüs | Computer Engineering Student",
+  description: "Personal profile and portfolio of Bence Gyürüs, Computer Engineering Student at BME VIK.",
 };
 
 export async function generateStaticParams() {

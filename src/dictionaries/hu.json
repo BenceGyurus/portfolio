@@ -138,5 +138,8 @@
   },
   "contact": {
     "title": "Építsünk valamit együtt."
+  },
+  "footer": {
+    "builtWith": "Next.js-sel készült"
   }
 }

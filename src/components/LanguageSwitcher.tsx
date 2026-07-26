@@ -17,16 +17,16 @@ export function LanguageSwitcher() {
   const currentLocale = pathname?.split("/")[1] || "en";
 
   return (
-    <div className="absolute top-6 right-6 flex items-center gap-2 text-sm font-mono z-50">
+    <div className="absolute top-6 right-6 flex items-center gap-1 p-1 rounded-full bg-background/50 backdrop-blur-md border border-border/50 shadow-sm text-sm font-mono z-50">
       <Link 
         href={switchLocale("en")} 
-        className={`px-2 py-1 rounded transition-colors ${currentLocale === "en" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-muted-foreground"}`}
+        className={`px-3 py-1.5 rounded-full transition-colors ${currentLocale === "en" ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-muted text-muted-foreground hover:text-foreground"}`}
       >
         EN
       </Link>
       <Link 
         href={switchLocale("hu")} 
-        className={`px-2 py-1 rounded transition-colors ${currentLocale === "hu" ? "bg-primary text-primary-foreground" : "hover:bg-muted text-muted-foreground"}`}
+        className={`px-3 py-1.5 rounded-full transition-colors ${currentLocale === "hu" ? "bg-primary text-primary-foreground shadow-sm" : "hover:bg-muted text-muted-foreground hover:text-foreground"}`}
       >
         HU
       </Link>

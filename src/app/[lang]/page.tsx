@@ -8,6 +8,7 @@ import { TechStack } from "@/components/sections/TechStack";
 import { Experience } from "@/components/sections/Experience";
 import { BlogPreview } from "@/components/sections/BlogPreview";
 import { Contact } from "@/components/sections/Contact";
+import { Footer } from "@/components/sections/Footer";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { getDictionary } from "@/dictionaries";
 
@@ -20,9 +21,10 @@ export default async function Home({
   const dict = await getDictionary(lang);
 
   return (
-    <main className="max-w-4xl mx-auto px-6 lg:px-8 py-12 min-h-screen relative">
-      <LanguageSwitcher />
-      <Hero dict={dict.hero} />
+    <main className="max-w-4xl mx-auto px-6 lg:px-8 py-12 min-h-screen relative overflow-hidden selection:bg-blue-500/30">
+      <div className="relative z-0">
+        <LanguageSwitcher />
+        <Hero dict={dict.hero} />
       <StatusAndNow dict={dict.statusAndNow} />
       <CurrentFocus dict={dict.currentFocus} />
       <Projects dict={dict.projects} />
@@ -32,6 +34,8 @@ export default async function Home({
       <Experience dict={dict.experience} />
       <BlogPreview dict={dict.blog} />
       <Contact dict={dict.contact} />
+      <Footer dict={dict.footer} />
+      </div>
     </main>
   );
 }

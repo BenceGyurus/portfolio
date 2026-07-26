@@ -138,5 +138,8 @@
   },
   "contact": {
     "title": "Let's build something."
+  },
+  "footer": {
+    "builtWith": "Built with Next.js"
   }
 }

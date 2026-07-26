@@ -38,9 +38,6 @@ export function Projects({ dict }: { dict: any }) {
 
             <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.links}</div>
             <div className="md:col-span-3 flex gap-4">
-              <Link href="https://github.com/bencegyurus" className="flex items-center gap-1 hover:text-blue-500 transition-colors">
-                <GithubIcon className="w-4 h-4" /> GitHub
-              </Link>
               <Link href="https://irodalomerettsegi.hu" className="flex items-center gap-1 hover:text-blue-500 transition-colors">
                 <ExternalLink className="w-4 h-4" /> {dict.website}
               </Link>
