@@ -1,6 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
 import { StatusAndNow } from "@/components/sections/StatusAndNow";
-import { CurrentFocus } from "@/components/sections/CurrentFocus";
 import { Projects } from "@/components/sections/Projects";
 import { Infrastructure } from "@/components/sections/Infrastructure";
 import { OpenSource } from "@/components/sections/OpenSource";
@@ -25,16 +24,15 @@ export default async function Home({
       <div className="relative z-0">
         <LanguageSwitcher />
         <Hero dict={dict.hero} />
-      <StatusAndNow dict={dict.statusAndNow} />
-      <CurrentFocus dict={dict.currentFocus} />
-      <Projects dict={dict.projects} />
-      <Infrastructure dict={{ ...dict.infrastructure, homelabNodes: dict.projects.homelabNodes }} />
-      <OpenSource dict={dict.openSource} />
-      <TechStack dict={dict.techStack} />
-      <Experience dict={dict.experience} />
-      <BlogPreview dict={dict.blog} />
-      <Contact dict={dict.contact} />
-      <Footer dict={dict.footer} />
+        <StatusAndNow dict={dict.statusAndNow} />
+        <Projects dict={dict.projects} />
+        <Infrastructure dict={{ ...dict.infrastructure, homelabNodes: dict.projects.homelabNodes }} />
+        <Experience dict={dict.experience} />
+        <TechStack dict={dict.techStack} />
+        <OpenSource dict={dict.openSource} />
+        <BlogPreview dict={dict.blog} />
+        <Contact dict={dict.contact} />
+        <Footer dict={dict.footer} />
       </div>
     </main>
   );

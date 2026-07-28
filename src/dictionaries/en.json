@@ -1,8 +1,9 @@
 {
   "hero": {
     "title": "Bence Gyürüs",
-    "subtitle1": "Computer Engineer",
-    "description": "As a Computer Engineering student, my primary focus is building robust software and reliable infrastructure. Beyond coding, I actively manage servers: I run a personal home server and co-maintain a 3-node cluster with a friend.",
+    "subtitle1": "Computer Engineering Student @ BME",
+    "subtitle2": "Linux Infrastructure • Self-hosting • DevOps",
+    "description": "Building reliable infrastructure and self-hosted systems. I run a personal HomeLab with Proxmox, Docker, and Kubernetes, and co-maintain a 3-node cluster with a friend.",
     "locationLabel": "Location:",
     "location": "Budapest",
     "educationLabel": "Education:",

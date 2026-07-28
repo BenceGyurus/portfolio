@@ -1,8 +1,9 @@
 {
   "hero": {
     "title": "Gyürüs Bence",
-    "subtitle1": "Mérnökinformatikus hallgató",
-    "description": "Mérnökinformatikus hallgatóként fő érdeklődési köröm a robusztus szoftverek és a megbízható infrastruktúrák építése. A kódolás mellett aktívan foglalkozom szerverek üzemeltetésével: egy saját otthoni szervert, valamint egy barátommal közösen egy 3 node-ból álló clustert is menedzselek.",
+    "subtitle1": "Mérnökinformatikus hallgató @ BME",
+    "subtitle2": "Linux infrastruktúra • Self-hosting • DevOps",
+    "description": "Megbízható infrastruktúrák és self-hosted rendszerek építése. Saját HomeLab-ot üzemeltetek Proxmox, Docker és Kubernetes alapokon, és egy barátommal közösen egy 3 node-os clustert is menedzselek.",
     "locationLabel": "Hely:",
     "location": "Budapest",
     "educationLabel": "Tanulmányok:",

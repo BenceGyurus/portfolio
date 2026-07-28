@@ -12,6 +12,9 @@ export function Hero({ dict }: { dict: any }) {
           <p className="text-xl text-muted-foreground font-mono">
             {dict.subtitle1}
           </p>
+          <p className="text-sm text-muted-foreground/70 font-mono mt-1">
+            {dict.subtitle2}
+          </p>
         </div>
         
         <p className="text-lg max-w-md text-foreground">
