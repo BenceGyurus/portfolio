@@ -10,7 +10,7 @@ export function BlogPreview({ dict }: { dict: any }) {
               <h3 className="text-foreground group-hover:text-primary transition-colors font-medium">Bootstrapping a Talos Kubernetes Cluster with Flux GitOps</h3>
               <span className="font-mono text-xs text-muted-foreground whitespace-nowrap">2026-07-26</span>
             </div>
-            <p className="text-sm text-muted-foreground mt-2 opacity-80 line-clamp-2">
+            <p className="text-sm text-muted-foreground mt-2 opacity-80 line-clamp-2 overflow-hidden">
               A detailed walkthrough of how I built my bare-metal Kubernetes cluster using Talos Linux, an immutable and API-managed OS, and how I set up Flux CD for a complete GitOps workflow.
             </p>
           </a>
