@@ -310,54 +310,7 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
         </div>
       </div>
 
-      {/* 2. Metrics Bar */}
-      {data && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-          {/* Storage Capacity */}
-          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 flex flex-col justify-between space-y-2">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5"><HardDrive className="w-4 h-4 text-emerald-400" /> Storage Capacity</span>
-              <span className="font-bold text-zinc-200">{data.telemetry.storageUsedTB} / {data.telemetry.storageTotalTB} TB</span>
-            </div>
-            <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
-              <div 
-                className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full transition-all duration-500"
-                style={{ width: `${(data.telemetry.storageUsedTB / data.telemetry.storageTotalTB) * 100}%` }}
-              ></div>
-            </div>
-          </div>
 
-          {/* Active Workloads */}
-          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
-                <Zap className="w-4 h-4 text-amber-400" /> Active Workloads
-              </span>
-              <div className="text-lg font-bold font-mono text-zinc-100">
-                {data.telemetry.activeContainers}+ <span className="text-xs text-zinc-400 font-normal">containers</span>
-              </div>
-            </div>
-            <div className="text-right font-mono text-xs text-zinc-400">
-              <span className="text-zinc-200 font-bold">{data.telemetry.totalVMs}</span> VMs/LXC
-            </div>
-          </div>
-
-          {/* Uptime */}
-          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 flex items-center justify-between">
-            <div className="space-y-0.5">
-              <span className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
-                <Clock className="w-4 h-4 text-blue-400" /> Global Uptime
-              </span>
-              <div className="text-lg font-bold font-mono text-emerald-400">
-                {data.overall.uptime30d}%
-              </div>
-            </div>
-            <div className="text-right font-mono text-xs text-zinc-400">
-              <span className="text-zinc-300 font-medium">30-Day Avg</span>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* 3. Core Infrastructure Cards */}
       {data && (
