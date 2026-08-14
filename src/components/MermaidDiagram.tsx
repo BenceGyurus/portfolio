@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
+import { ZoomIn, ZoomOut, RotateCcw, Move } from "lucide-react";
 
 interface MermaidProps {
   chart: string;
@@ -13,6 +14,19 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   const { resolvedTheme } = useTheme();
   const [svgContent, setSvgContent] = useState<string>("");
   const [mounted, setMounted] = useState<boolean>(false);
+  const [zoomLevel, setZoomLevel] = useState<number>(1);
+
+  const handleZoomIn = () => {
+    setZoomLevel((prev) => Math.min(prev + 0.25, 2.5));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prev) => Math.max(prev - 0.25, 0.5));
+  };
+
+  const handleReset = () => {
+    setZoomLevel(1);
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -26,7 +40,6 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
     async function renderChart() {
       try {
         const mermaid = (await import("mermaid")).default;
-        
         const isDark = resolvedTheme === "dark";
         
         mermaid.initialize({
@@ -82,12 +95,58 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   }
 
   return (
-    <div className="w-full overflow-x-auto p-4 rounded-xl border border-border bg-card/50 backdrop-blur-sm flex justify-center selection:bg-blue-500/20">
-      <div 
-        ref={containerRef}
-        className="w-full flex justify-center [&_svg]:max-w-full [&_svg]:h-auto"
-        dangerouslySetInnerHTML={{ __html: svgContent }}
-      />
+    <div className="relative w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden group">
+      {/* Zoom Controls Bar */}
+      <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/80 backdrop-blur-md border border-border rounded-lg p-1 shadow-sm font-mono text-xs">
+        <button
+          onClick={handleZoomOut}
+          className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
+          title="Zoom Out (-)"
+          aria-label="Zoom Out"
+        >
+          <ZoomOut className="w-4 h-4" />
+        </button>
+
+        <span className="px-2 text-[11px] font-bold text-muted-foreground min-w-[45px] text-center select-none">
+          {Math.round(zoomLevel * 100)}%
+        </span>
+
+        <button
+          onClick={handleZoomIn}
+          className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
+          title="Zoom In (+)"
+          aria-label="Zoom In"
+        >
+          <ZoomIn className="w-4 h-4" />
+        </button>
+
+        <div className="h-4 w-px bg-border mx-0.5"></div>
+
+        <button
+          onClick={handleReset}
+          className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
+          title="Reset Zoom"
+          aria-label="Reset Zoom"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+        </button>
+      </div>
+
+      {/* Scrollable & Zoomable Container */}
+      <div className="w-full overflow-auto p-6 sm:p-10 min-h-[320px] flex items-center justify-center cursor-grab active:cursor-grabbing selection:bg-blue-500/20">
+        <div 
+          ref={containerRef}
+          className="transition-transform duration-200 ease-out origin-center flex justify-center [&_svg]:max-w-none text-center"
+          style={{ transform: `scale(${zoomLevel})` }}
+          dangerouslySetInnerHTML={{ __html: svgContent }}
+        />
+      </div>
+
+      {/* Mobile Hint Overlay */}
+      <div className="absolute bottom-2 left-3 z-10 flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/70 pointer-events-none">
+        <Move className="w-3 h-3" />
+        <span>Use + / - to zoom topology diagram</span>
+      </div>
     </div>
   );
 }
