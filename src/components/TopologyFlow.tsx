@@ -29,7 +29,7 @@ import {
 } from "react-icons/si";
 import { Globe, Gamepad2, Mail, Layers } from "lucide-react";
 
-type GroupData = Node<{ label: string; tag?: string }>;
+type GroupData = Node<{ label: string }>;
 type CardData = Node<{
   title: string;
   subtitle?: string;
@@ -45,11 +45,6 @@ function GroupNode({ data }: NodeProps<GroupData>) {
         <span className="text-xs font-mono font-semibold tracking-wider uppercase text-muted-foreground">
           {data.label}
         </span>
-        {data.tag && (
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted/60 border border-border/50 text-muted-foreground">
-            {data.tag}
-          </span>
-        )}
       </div>
     </div>
   );
@@ -131,13 +126,13 @@ export function TopologyFlow() {
         data: { title: "Public Internet", subtitle: "Global Traffic", icon: "internet", status: "online" }
       },
 
-      // 2. Proxmox Container Group
+      // 2. Proxmox Container Group (VLAN 100 Main Host)
       {
         id: "proxmox",
         type: "groupNode",
         position: { x: 20, y: 110 },
-        style: { width: 960, height: 1060 },
-        data: { label: "Proxmox VE Hypervisor", tag: "VLAN 100 Main Network" }
+        style: { width: 960, height: 960 },
+        data: { label: "Proxmox VE Hypervisor" }
       },
 
       // Cloudflare Tunnel LXC inside Proxmox
@@ -162,7 +157,7 @@ export function TopologyFlow() {
         type: "groupNode",
         position: { x: 40, y: 360 },
         style: { width: 920, height: 320 },
-        data: { label: "docker-vm", tag: "VLAN 100 • 4TB Storage" }
+        data: { label: "docker-vm (4TB Stateful Storage)" }
       },
       { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 420 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik", status: "online" } },
       { id: "immich", type: "cardNode", position: { x: 280, y: 420 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "docker", status: "online" } },
@@ -178,44 +173,53 @@ export function TopologyFlow() {
         id: "docker2-group",
         type: "groupNode",
         position: { x: 40, y: 710 },
-        style: { width: 440, height: 210 },
-        data: { label: "docker2", tag: "VLAN 100 • Stateless" }
+        style: { width: 440, height: 160 },
+        data: { label: "docker2 (Stateless)" }
       },
-      { id: "grafana", type: "cardNode", position: { x: 60, y: 770 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
-      { id: "prometheus", type: "cardNode", position: { x: 270, y: 770 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
+      { id: "grafana", type: "cardNode", position: { x: 60, y: 760 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
+      { id: "prometheus", type: "cardNode", position: { x: 270, y: 760 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
 
       // --- Subgroup C: Talos K8s Cluster ---
       {
         id: "k8s-group",
         type: "groupNode",
         position: { x: 500, y: 710 },
-        style: { width: 460, height: 210 },
-        data: { label: "Talos K8s Cluster", tag: "VLAN 100 • Kubernetes" }
+        style: { width: 460, height: 160 },
+        data: { label: "Talos K8s Cluster" }
       },
-      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 770 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
-      { id: "flux", type: "cardNode", position: { x: 730, y: 770 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
+      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 760 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
+      { id: "flux", type: "cardNode", position: { x: 730, y: 760 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
 
-      // --- Subgroup D: Main VLAN 100 Dedicated Service VMs ---
+      // --- Separate VM Subgroup D1: Home-Assistant HAOS (Dedicated VM) ---
       {
-        id: "dedicated-vms-group",
+        id: "hass-vm-group",
         type: "groupNode",
-        position: { x: 40, y: 940 },
-        style: { width: 440, height: 210 },
-        data: { label: "Dedicated Service VMs", tag: "VLAN 100" }
+        position: { x: 40, y: 890 },
+        style: { width: 230, height: 160 },
+        data: { label: "Home-Assistant (VM)" }
       },
-      { id: "hass", type: "cardNode", position: { x: 60, y: 1000 }, data: { title: "Home-Assistant", subtitle: "HAOS VM", icon: "hass", status: "online" } },
-      { id: "minecraft", type: "cardNode", position: { x: 270, y: 1000 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller VM", icon: "minecraft", status: "online" } },
+      { id: "hass", type: "cardNode", position: { x: 60, y: 940 }, data: { title: "Home-Assistant", subtitle: "HAOS OS", icon: "hass", status: "online" } },
 
-      // --- Subgroup E: VLAN 99 Secure Network ---
+      // --- Separate VM Subgroup D2: Minecraft Server (Dedicated VM) ---
+      {
+        id: "mc-vm-group",
+        type: "groupNode",
+        position: { x: 280, y: 890 },
+        style: { width: 230, height: 160 },
+        data: { label: "minecraft (VM)" }
+      },
+      { id: "minecraft", type: "cardNode", position: { x: 300, y: 940 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller", icon: "minecraft", status: "online" } },
+
+      // --- Separate Top-Level Network: VLAN 99 (Secure VPN Network) ---
       {
         id: "vlan99-group",
         type: "groupNode",
-        position: { x: 500, y: 940 },
-        style: { width: 460, height: 210 },
-        data: { label: "VLAN 99 Network", tag: "VLAN 99 • Tailscale VPN" }
+        position: { x: 530, y: 890 },
+        style: { width: 430, height: 160 },
+        data: { label: "VLAN 99 (Tailscale VPN)" }
       },
-      { id: "tailscale", type: "cardNode", position: { x: 520, y: 1000 }, data: { title: "Tailscale Gateway", subtitle: "LXC (VLAN 99)", icon: "tailscale", status: "online" } },
-      { id: "adguard", type: "cardNode", position: { x: 730, y: 1000 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } }
+      { id: "tailscale", type: "cardNode", position: { x: 550, y: 940 }, data: { title: "Tailscale Gateway", subtitle: "LXC Container", icon: "tailscale", status: "online" } },
+      { id: "adguard", type: "cardNode", position: { x: 750, y: 940 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } }
     ],
     []
   );
@@ -245,7 +249,7 @@ export function TopologyFlow() {
       { id: "e6", source: "main-lb", target: "k8s-ingress", style: { stroke: strokeColor, strokeWidth: 1.5 } },
       { id: "e7", source: "k8s-ingress", target: "flux", style: { stroke: strokeColor, strokeWidth: 1.5 } },
 
-      // Main LB to Main VLAN Dedicated VMs (Home-Assistant & Minecraft)
+      // Main LB to Dedicated VMs
       { id: "e8-1", source: "main-lb", target: "hass", style: { stroke: strokeColor, strokeWidth: 1.5 } },
       { id: "e8-2", source: "main-lb", target: "minecraft", style: { stroke: strokeColor, strokeWidth: 1.5 } },
 
