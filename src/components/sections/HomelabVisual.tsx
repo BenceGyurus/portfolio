@@ -8,10 +8,11 @@ graph TD
     Internet[Internet Public Traffic] --> Cloudflare[cloudflare-tunnel LXC]
     
     subgraph Proxmox [Proxmox VE Hypervisor]
-        Cloudflare --> MainTraefik[loadbalancer - Main Traefik Reverse Proxy LXC]
+        MainTraefik[loadbalancer - Main Traefik Reverse Proxy LXC]
+        Cloudflare --> MainTraefik
         
         subgraph DockerMain ["docker-vm - Main Docker Host (4TB)"]
-            MainTraefik --> DockerTraefik[Dedicated Docker Traefik]
+            DockerTraefik[Dedicated Docker Traefik]
             DockerTraefik --> Immich[Immich - Photo Storage]
             DockerTraefik --> Seafile[Seafile - Cloud Storage]
             DockerTraefik --> Paperless[Paperless-ngx - Documents]
@@ -22,12 +23,12 @@ graph TD
         end
         
         subgraph DockerStateless ["docker2 - Stateless & Monitoring"]
-            MainTraefik --> Grafana[Grafana - Dashboards]
-            MainTraefik --> Prometheus[Prometheus - Metrics]
+            Grafana[Grafana - Dashboards]
+            Prometheus[Prometheus - Metrics]
         end
         
         subgraph K8sCluster ["Talos K8s Cluster (Bare-Metal)"]
-            MainTraefik --> K8sTraefik[Internal K8s Traefik Ingress Controller]
+            K8sTraefik[Internal K8s Traefik Ingress Controller]
             K8sTraefik --> TalosCP[talos-controlplane]
             K8sTraefik --> TalosWorker[talos-worker]
             TalosCP --- TalosWorker
@@ -44,6 +45,11 @@ graph TD
             Maildrop[mail-drop-server]
             UniFi[unifi Controller - Inactive]
         end
+
+        MainTraefik --> DockerTraefik
+        MainTraefik --> Grafana
+        MainTraefik --> Prometheus
+        MainTraefik --> K8sTraefik
     end
 `;
 
