@@ -27,7 +27,7 @@ import {
   SiPrometheus,
   SiFlux
 } from "react-icons/si";
-import { Globe, Gamepad2, Mail, Server, Layers } from "lucide-react";
+import { Globe, Gamepad2, Mail, Layers } from "lucide-react";
 
 type GroupData = Node<{ label: string; tag?: string }>;
 type CardData = Node<{
@@ -163,13 +163,10 @@ export function TopologyFlow() {
         style: { width: 920, height: 320 },
         data: { label: "docker-vm", tag: "4TB Stateful Storage" }
       },
-      // Row 1 inside docker-vm:
       { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 410 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik", status: "online" } },
       { id: "immich", type: "cardNode", position: { x: 280, y: 410 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "docker", status: "online" } },
       { id: "seafile", type: "cardNode", position: { x: 500, y: 410 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "docker", status: "online" } },
       { id: "paperless", type: "cardNode", position: { x: 720, y: 410 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "docker", status: "online" } },
-
-      // Row 2 inside docker-vm:
       { id: "authentik", type: "cardNode", position: { x: 60, y: 530 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "docker", status: "online" } },
       { id: "forgejo", type: "cardNode", position: { x: 280, y: 530 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "docker", status: "online" } },
       { id: "openwebui", type: "cardNode", position: { x: 500, y: 530 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "docker", status: "online" } },
@@ -197,18 +194,27 @@ export function TopologyFlow() {
       { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 760 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
       { id: "flux", type: "cardNode", position: { x: 730, y: 760 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
 
-      // --- Subgroup D: Dedicated VMs & Network ---
+      // --- Subgroup D: Main VLAN Dedicated Service VMs ---
       {
-        id: "services-group",
+        id: "dedicated-vms-group",
         type: "groupNode",
         position: { x: 40, y: 930 },
-        style: { width: 920, height: 210 },
-        data: { label: "Network & Dedicated Service VMs", tag: "VLAN 99 / HAOS" }
+        style: { width: 440, height: 210 },
+        data: { label: "Dedicated Service VMs", tag: "Main VLAN" }
       },
-      { id: "tailscale", type: "cardNode", position: { x: 60, y: 990 }, data: { title: "Tailscale Gateway", subtitle: "LXC (VLAN 99)", icon: "tailscale", status: "online" } },
-      { id: "adguard", type: "cardNode", position: { x: 280, y: 990 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } },
-      { id: "hass", type: "cardNode", position: { x: 500, y: 990 }, data: { title: "Home-Assistant", subtitle: "HAOS VM", icon: "hass", status: "online" } },
-      { id: "minecraft", type: "cardNode", position: { x: 720, y: 990 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller VM", icon: "minecraft", status: "online" } }
+      { id: "hass", type: "cardNode", position: { x: 60, y: 990 }, data: { title: "Home-Assistant", subtitle: "HAOS VM", icon: "hass", status: "online" } },
+      { id: "minecraft", type: "cardNode", position: { x: 270, y: 990 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller VM", icon: "minecraft", status: "online" } },
+
+      // --- Subgroup E: VLAN 99 Secure Network ---
+      {
+        id: "vlan99-group",
+        type: "groupNode",
+        position: { x: 500, y: 930 },
+        style: { width: 460, height: 210 },
+        data: { label: "VLAN 99 Network", tag: "Tailscale / VPN" }
+      },
+      { id: "tailscale", type: "cardNode", position: { x: 520, y: 990 }, data: { title: "Tailscale Gateway", subtitle: "LXC (VLAN 99)", icon: "tailscale", status: "online" } },
+      { id: "adguard", type: "cardNode", position: { x: 730, y: 990 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } }
     ],
     []
   );
@@ -238,8 +244,12 @@ export function TopologyFlow() {
       { id: "e6", source: "main-lb", target: "k8s-ingress", style: { stroke: strokeColor, strokeWidth: 1.5 } },
       { id: "e7", source: "k8s-ingress", target: "flux", style: { stroke: strokeColor, strokeWidth: 1.5 } },
 
-      // VPN & Adguard
-      { id: "e8", source: "tailscale", target: "adguard", style: { stroke: strokeColor, strokeWidth: 1.5 } }
+      // Main LB to Main VLAN Dedicated VMs (Home-Assistant & Minecraft)
+      { id: "e8-1", source: "main-lb", target: "hass", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e8-2", source: "main-lb", target: "minecraft", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+
+      // VLAN 99 Tailscale to AdGuard
+      { id: "e9", source: "tailscale", target: "adguard", style: { stroke: strokeColor, strokeWidth: 1.5 } }
     ],
     [strokeColor]
   );
