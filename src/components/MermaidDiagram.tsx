@@ -11,6 +11,7 @@ interface MermaidProps {
 
 export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: MermaidProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
   const [svgContent, setSvgContent] = useState<string>("");
   const [mounted, setMounted] = useState<boolean>(false);
@@ -31,6 +32,24 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
     setZoomLevel(1);
     setPan({ x: 0, y: 0 });
   };
+
+  // Mouse Wheel Zoom
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = e.deltaY;
+      const zoomFactor = delta < 0 ? 1.12 : 0.88;
+      setZoomLevel((prev) => Math.min(Math.max(prev * zoomFactor, 0.4), 5.0));
+    };
+
+    viewport.addEventListener("wheel", onWheel, { passive: false });
+    return () => {
+      viewport.removeEventListener("wheel", onWheel);
+    };
+  }, []);
 
   // Mouse Drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -181,8 +200,9 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
         </button>
       </div>
 
-      {/* Draggable & Zoomable Viewport */}
+      {/* Draggable & Wheel Zoom Viewport */}
       <div 
+        ref={viewportRef}
         className={`w-full overflow-hidden p-4 sm:p-8 min-h-[450px] flex items-center justify-center ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
@@ -196,9 +216,10 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
       >
         <div 
           ref={containerRef}
-          className="transition-transform duration-100 ease-out origin-center flex justify-center [&_svg]:min-w-[650px] sm:[&_svg]:min-w-[850px] [&_svg]:h-auto text-center"
+          className="flex justify-center [&_svg]:min-w-[650px] sm:[&_svg]:min-w-[850px] [&_svg]:h-auto text-center"
           style={{ 
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})` 
+            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})`,
+            transition: isDragging ? "none" : "transform 0.15s ease-out"
           }}
           dangerouslySetInnerHTML={{ __html: svgContent }}
         />
@@ -207,7 +228,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
       {/* Mobile & Mouse Drag Hint Overlay */}
       <div className="absolute bottom-2 left-3 z-10 flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/70 pointer-events-none">
         <Move className="w-3 h-3" />
-        <span>Click & drag to pan • + / - to zoom</span>
+        <span>Scroll wheel to zoom • Click & drag to pan</span>
       </div>
     </div>
   );
