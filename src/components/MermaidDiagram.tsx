@@ -15,6 +15,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   const { resolvedTheme } = useTheme();
   const [svgContent, setSvgContent] = useState<string>("");
   const [mounted, setMounted] = useState<boolean>(false);
+  const [zoomPercent, setZoomPercent] = useState<number>(100);
 
   useEffect(() => {
     setMounted(true);
@@ -90,8 +91,11 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
         maxScale={4}
         centerOnInit={true}
         wheel={{ step: 0.1 }}
+        onTransform={(ref) => {
+          setZoomPercent(Math.round(ref.state.scale * 100));
+        }}
       >
-        {({ zoomIn, zoomOut, resetTransform, state }) => (
+        {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             {/* Minimal Zoom Controls */}
             <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/85 backdrop-blur-md border border-border rounded-lg p-1 shadow-xs font-mono text-xs">
@@ -105,7 +109,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
               </button>
 
               <span className="px-1.5 text-[11px] font-medium text-muted-foreground min-w-[42px] text-center select-none">
-                {Math.round(state.scale * 100)}%
+                {zoomPercent}%
               </span>
 
               <button
@@ -120,7 +124,10 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
               <div className="h-3 w-px bg-border mx-0.5"></div>
 
               <button
-                onClick={() => resetTransform()}
+                onClick={() => {
+                  resetTransform();
+                  setZoomPercent(100);
+                }}
                 className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
                 title="Reset"
                 aria-label="Reset"
