@@ -5,12 +5,12 @@ import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 const HOMELAB_MERMAID_CHART = `
 graph TD
-    Internet[Internet Public Traffic] --> Cloudflare[cloudflare-tunnel LXC 106]
-    Cloudflare --> MainTraefik[loadbalancer Main Traefik Reverse Proxy VM 600]
+    Internet[Internet Public Traffic] --> Cloudflare[cloudflare-tunnel]
+    Cloudflare --> MainTraefik[loadbalancer - Main Traefik Reverse Proxy]
     
     subgraph Proxmox [Proxmox VE Hypervisor]
         
-        subgraph DockerMain ["docker-vm (VM 103) - Main Docker Host (4TB)"]
+        subgraph DockerMain ["docker-vm - Main Docker Host (4TB)"]
             MainTraefik --> DockerTraefik[Dedicated Docker Traefik]
             DockerTraefik --> Immich[Immich - Photo Storage]
             DockerTraefik --> Seafile[Seafile - Cloud Storage]
@@ -21,28 +21,28 @@ graph TD
             DockerTraefik --> Affine[Affine - Workspace]
         end
         
-        subgraph DockerStateless ["docker2 (VM 112) - Stateless & Monitoring"]
+        subgraph DockerStateless ["docker2 - Stateless & Monitoring"]
             MainTraefik --> Grafana[Grafana - Dashboards]
             MainTraefik --> Prometheus[Prometheus - Metrics]
         end
         
         subgraph K8sCluster ["Talos K8s Cluster (Bare-Metal)"]
             MainTraefik --> K8sTraefik[Internal K8s Traefik Ingress Controller]
-            K8sTraefik --> TalosCP[talos-controlplane VM 120]
-            K8sTraefik --> TalosWorker[talos-worker VM 121]
+            K8sTraefik --> TalosCP[talos-controlplane]
+            K8sTraefik --> TalosWorker[talos-worker]
             TalosCP --- TalosWorker
             TalosWorker --> Flux[Flux CD - GitOps Engine]
         end
         
         subgraph VLAN99 ["VLAN 99 - Secure VPN Network"]
-            Tailscale[vpn VM 113 - Tailscale Gateway] --> AdGuard[adguard-home VM 104 - DNS Server]
+            Tailscale[vpn - Tailscale Gateway] --> AdGuard[adguard-home - DNS Server]
         end
         
         subgraph DedicatedVMs ["Dedicated Service VMs"]
-            HASS[Home-Assistant HAOS VM 780]
-            Crafty[minecraft VM 102 - Crafty Controller]
-            Maildrop[mail-drop-server VM 107]
-            UniFi[unifi Controller VM 105 - Inactive]
+            HASS[Home-Assistant HAOS]
+            Crafty[minecraft - Crafty Controller]
+            Maildrop[mail-drop-server]
+            UniFi[unifi Controller - Inactive]
         end
     end
 `;
