@@ -29,27 +29,25 @@ import {
 } from "react-icons/si";
 import { Globe, Gamepad2, Mail, Server } from "lucide-react";
 
-type GroupData = Node<{ label: string; tag?: string; color?: string }>;
+type GroupData = Node<{ label: string; tag?: string }>;
 type CardData = Node<{
   title: string;
   subtitle?: string;
   icon?: string;
-  badge?: string;
   tags?: string[];
   status?: "online" | "inactive" | "internal";
-  color?: string;
 }>;
 
-// --- Custom Group Node (Containers like Proxmox, docker-vm, etc.) ---
+// --- Custom Group Node ---
 function GroupNode({ data }: NodeProps<GroupData>) {
   return (
-    <div className="w-full h-full border-2 border-dashed border-border/80 bg-background/30 rounded-2xl p-4 transition-all pointer-events-none">
+    <div className="w-full h-full border border-dashed border-border/70 bg-card/20 rounded-2xl p-4 transition-all pointer-events-none">
       <div className="flex items-center justify-between gap-2 mb-2 pointer-events-auto">
-        <span className="text-xs font-mono font-bold tracking-wider uppercase text-muted-foreground/80">
+        <span className="text-xs font-mono font-semibold tracking-wider uppercase text-muted-foreground">
           {data.label}
         </span>
         {data.tag && (
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-muted border border-border text-muted-foreground font-semibold">
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted/60 border border-border/50 text-muted-foreground">
             {data.tag}
           </span>
         )}
@@ -80,16 +78,16 @@ function CardNode({ data }: NodeProps<CardData>) {
   };
 
   return (
-    <div className="relative bg-card border border-border rounded-xl p-3.5 shadow-sm min-w-[200px] max-w-[260px] text-card-foreground transition-all hover:border-muted-foreground/40">
-      <Handle type="target" position={Position.Top} className="!bg-blue-500 !w-2.5 !h-2.5 !-top-1.5" />
+    <div className="relative bg-card border border-border rounded-xl p-3.5 shadow-2xs min-w-[200px] max-w-[260px] text-card-foreground select-none">
+      <Handle type="target" position={Position.Top} className="!bg-muted-foreground/40 !w-2 !h-2 !-top-1 opacity-0 group-hover:opacity-100" />
       
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="p-1.5 rounded-lg bg-muted/60 shrink-0">
+          <div className="p-1.5 rounded-md bg-muted/50 shrink-0">
             {renderIcon()}
           </div>
           <div className="min-w-0">
-            <h4 className="text-xs font-bold leading-tight truncate">{data.title}</h4>
+            <h4 className="text-xs font-semibold leading-tight truncate">{data.title}</h4>
             {data.subtitle && (
               <p className="text-[10px] font-mono text-muted-foreground leading-tight truncate mt-0.5">
                 {data.subtitle}
@@ -99,7 +97,7 @@ function CardNode({ data }: NodeProps<CardData>) {
         </div>
         {data.status && (
           <span
-            className={`w-2 h-2 rounded-full shrink-0 mt-1 ${
+            className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1 ${
               data.status === "online"
                 ? "bg-emerald-500"
                 : data.status === "inactive"
@@ -111,11 +109,11 @@ function CardNode({ data }: NodeProps<CardData>) {
       </div>
 
       {data.tags && data.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1 mt-2.5 pt-2 border-t border-border/50">
+        <div className="flex flex-wrap gap-1 mt-2.5 pt-2 border-t border-border/40">
           {data.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-muted/80 text-muted-foreground border border-border/40 font-medium"
+              className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-muted/40 text-muted-foreground border border-border/30"
             >
               {tag}
             </span>
@@ -123,7 +121,7 @@ function CardNode({ data }: NodeProps<CardData>) {
         </div>
       )}
 
-      <Handle type="source" position={Position.Bottom} className="!bg-blue-500 !w-2.5 !h-2.5 !-bottom-1.5" />
+      <Handle type="source" position={Position.Bottom} className="!bg-muted-foreground/40 !w-2 !h-2 !-bottom-1 opacity-0 group-hover:opacity-100" />
     </div>
   );
 }
@@ -160,7 +158,7 @@ export function TopologyFlow() {
         type: "groupNode",
         position: { x: 20, y: 210 },
         style: { width: 900, height: 720 },
-        data: { label: "Proxmox VE Hypervisor", tag: "Bare-Metal Node" }
+        data: { label: "Proxmox VE Hypervisor", tag: "Bare-Metal Host" }
       },
 
       // Main Loadbalancer LXC inside Proxmox
@@ -270,47 +268,52 @@ export function TopologyFlow() {
     []
   );
 
+  const strokeColor = isDark ? "#64748b" : "#94a3b8";
+
   const initialEdges = useMemo(
     () => [
-      { id: "e1", source: "internet", target: "cloudflare", animated: true, style: { stroke: "#3b82f6", strokeWidth: 2 } },
-      { id: "e2", source: "cloudflare", target: "main-lb", animated: true, style: { stroke: "#24A1C1", strokeWidth: 2 } },
-      { id: "e3", source: "main-lb", target: "docker-traefik", animated: true, style: { stroke: "#2496ED", strokeWidth: 2 } },
-      { id: "e4", source: "main-lb", target: "grafana", style: { stroke: "#F46800", strokeWidth: 1.5 } },
-      { id: "e5", source: "main-lb", target: "prometheus", style: { stroke: "#E6522C", strokeWidth: 1.5 } },
-      { id: "e6", source: "main-lb", target: "k8s-ingress", animated: true, style: { stroke: "#326CE5", strokeWidth: 2 } },
-      { id: "e7", source: "k8s-ingress", target: "flux", style: { stroke: "#50668F", strokeWidth: 1.5 } },
-      { id: "e8", source: "tailscale", target: "adguard", style: { stroke: "#68BC71", strokeWidth: 1.5 } }
+      { id: "e1", source: "internet", target: "cloudflare", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e2", source: "cloudflare", target: "main-lb", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e3", source: "main-lb", target: "docker-traefik", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e4", source: "main-lb", target: "grafana", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e5", source: "main-lb", target: "prometheus", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e6", source: "main-lb", target: "k8s-ingress", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e7", source: "k8s-ingress", target: "flux", style: { stroke: strokeColor, strokeWidth: 1.5 } },
+      { id: "e8", source: "tailscale", target: "adguard", style: { stroke: strokeColor, strokeWidth: 1.5 } }
     ],
-    []
+    [strokeColor]
   );
 
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
 
   return (
-    <div className="w-full h-[650px] rounded-2xl border border-border bg-card/40 backdrop-blur-xs overflow-hidden relative shadow-sm">
+    <div className="w-full h-[650px] rounded-xl border border-border bg-card/20 backdrop-blur-xs overflow-hidden relative select-none">
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
+        nodesDraggable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
         fitView
         fitViewOptions={{ padding: 0.2 }}
-        minZoom={0.3}
-        maxZoom={2.5}
+        minZoom={0.4}
+        maxZoom={2.0}
         colorMode={isDark ? "dark" : "light"}
         attributionPosition="bottom-right"
         proOptions={{ hideAttribution: true }}
       >
         <Background
           variant={BackgroundVariant.Dots}
-          gap={24}
-          size={1.5}
-          color={isDark ? "#3f3f46" : "#cbd5e1"}
+          gap={28}
+          size={1}
+          color={isDark ? "#27272a" : "#e4e4e7"}
         />
         <Controls
-          className="!bg-background/85 !backdrop-blur-md !border !border-border !rounded-lg !shadow-xs font-mono text-xs !m-3"
+          className="!bg-background/80 !backdrop-blur-md !border !border-border !rounded-lg !shadow-2xs font-mono text-xs !m-3"
           showInteractive={false}
         />
       </ReactFlow>
