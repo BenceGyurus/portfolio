@@ -94,24 +94,42 @@ export function Projects({ dict }: { dict: any }) {
             <h3 className="text-xl font-bold">{dict.project3.title}</h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.status}</div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="text-sm font-mono text-muted-foreground">{dict.status}</div>
             <div className="md:col-span-3 flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
               {dict.inDevelopment}
             </div>
             
-            <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.description}</div>
+            <div className="text-sm font-mono text-muted-foreground">{dict.description}</div>
             <div className="md:col-span-3">
               {dict.project3.desc}
             </div>
 
-            <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.focus}</div>
+            <div className="text-sm font-mono text-muted-foreground">{dict.focus}</div>
             <div className="md:col-span-3 space-y-1">
               <p>• {dict.project3.focus1}</p>
               <p>• {dict.project3.focus2}</p>
               <p>• {dict.project3.focus3}</p>
             </div>
+
+            <div className="text-sm font-mono text-muted-foreground">{dict.links}</div>
+            <div className="md:col-span-3 flex gap-4">
+              <span className="flex items-center gap-1 text-muted-foreground">
+                <ExternalLink className="w-4 h-4" /> matekx.hu
+              </span>
+            </div>
+          </div>
+
+          {/* Screenshot */}
+          <div className="rounded-lg border border-border overflow-hidden shadow-sm">
+            <Image
+              src="/images/matekx.png"
+              alt="matekx.hu screenshot"
+              width={1200}
+              height={675}
+              className="w-full h-auto"
+            />
           </div>
         </div>
       </div>

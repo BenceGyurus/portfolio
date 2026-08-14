@@ -69,10 +69,10 @@
       "desc": "Personal infrastructure built since 2023 for learning, experimenting, and hosting services reliably (started with TrueNAS, migrated to Proxmox in 2025)."
     },
     "project3": {
-      "title": "Math Practice Platform",
-      "desc": "Template-based platform that generates math problems using random numbers, helping students practice and improve their skills.",
-      "focus1": "Infinite Task Generation",
-      "focus2": "Instant Feedback",
+      "title": "matekx.hu",
+      "desc": "An upcoming interactive math practice platform providing topic-based problem sets, instant evaluation, and step-by-step solutions for high school admission and exam preparation.",
+      "focus1": "Infinite Problem Generation",
+      "focus2": "Instant Evaluation",
       "focus3": "Step-by-step Solutions"
     },
     "homelabNodes": {

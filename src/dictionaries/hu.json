@@ -69,8 +69,8 @@
       "desc": "2023 óta épülő saját infrastruktúra tanuláshoz, kísérletezéshez és szolgáltatások megbízható futtatásához (kezdetben TrueNAS, majd 2025-től Proxmox alapokon)."
     },
     "project3": {
-      "title": "Matekgyakorló",
-      "desc": "Sablon-alapú platform, amely véletlenszerű számokkal generál feladatokat, segítve a diákok matematikai készségeinek gyakorlását.",
+      "title": "matekx.hu",
+      "desc": "Készülőben lévő matematika gyakorló platform. Témakörönként folyamatosan megújuló feladatokat, azonnali javítást és lépésről lépésre lebontott magyarázatokat biztosít diákoknak a felvételihez és az érettségihez.",
       "focus1": "Végtelen feladatgenerálás",
       "focus2": "Azonnali értékelés",
       "focus3": "Lépésenkénti levezetések"
