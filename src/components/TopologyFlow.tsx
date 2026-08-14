@@ -46,7 +46,6 @@ type CardData = Node<{
   title: string;
   subtitle?: string;
   icon?: string;
-  status?: "online" | "inactive" | "internal";
 }>;
 
 // --- Custom Group Node ---
@@ -94,31 +93,18 @@ function CardNode({ data }: NodeProps<CardData>) {
     <div className="relative bg-card border border-border rounded-xl p-3 shadow-2xs w-[190px] text-card-foreground select-none">
       <Handle type="target" position={Position.Top} className="!bg-muted-foreground/40 !w-2 !h-2 !-top-1 opacity-0 group-hover:opacity-100" />
       
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="p-1.5 rounded-md bg-muted/50 shrink-0">
-            {renderIcon()}
-          </div>
-          <div className="min-w-0">
-            <h4 className="text-xs font-semibold leading-tight truncate">{data.title}</h4>
-            {data.subtitle && (
-              <p className="text-[10px] font-mono text-muted-foreground leading-tight truncate mt-0.5">
-                {data.subtitle}
-              </p>
-            )}
-          </div>
+      <div className="flex items-center gap-2.5 min-w-0">
+        <div className="p-1.5 rounded-md bg-muted/50 shrink-0">
+          {renderIcon()}
         </div>
-        {data.status && (
-          <span
-            className={`w-1.5 h-1.5 rounded-full shrink-0 mt-1 ${
-              data.status === "online"
-                ? "bg-emerald-500"
-                : data.status === "inactive"
-                ? "bg-amber-500/60"
-                : "bg-blue-500"
-            }`}
-          />
-        )}
+        <div className="min-w-0">
+          <h4 className="text-xs font-semibold leading-tight truncate">{data.title}</h4>
+          {data.subtitle && (
+            <p className="text-[10px] font-mono text-muted-foreground leading-tight truncate mt-0.5">
+              {data.subtitle}
+            </p>
+          )}
+        </div>
       </div>
 
       <Handle type="source" position={Position.Bottom} className="!bg-muted-foreground/40 !w-2 !h-2 !-bottom-1 opacity-0 group-hover:opacity-100" />
@@ -142,7 +128,7 @@ export function TopologyFlow() {
         id: "internet",
         type: "cardNode",
         position: { x: 390, y: 20 },
-        data: { title: "Public Internet", subtitle: "Global Traffic", icon: "internet", status: "online" }
+        data: { title: "Public Internet", subtitle: "Global Traffic", icon: "internet" }
       },
 
       // 2. Proxmox Container Group (VLAN 100 Main Host)
@@ -159,7 +145,7 @@ export function TopologyFlow() {
         id: "cloudflare",
         type: "cardNode",
         position: { x: 390, y: 160 },
-        data: { title: "cloudflare-tunnel", subtitle: "LXC Container", icon: "cloudflare", status: "online" }
+        data: { title: "cloudflare-tunnel", subtitle: "LXC Container", icon: "cloudflare" }
       },
 
       // Main Loadbalancer LXC inside Proxmox
@@ -167,7 +153,7 @@ export function TopologyFlow() {
         id: "main-lb",
         type: "cardNode",
         position: { x: 390, y: 260 },
-        data: { title: "loadbalancer", subtitle: "Traefik Reverse Proxy LXC", icon: "traefik", status: "online" }
+        data: { title: "loadbalancer", subtitle: "Traefik Reverse Proxy LXC", icon: "traefik" }
       },
 
       // --- Subgroup A: docker-vm (Stateful 4TB) ---
@@ -178,14 +164,14 @@ export function TopologyFlow() {
         style: { width: 920, height: 320 },
         data: { label: "docker-vm (4TB Stateful Storage)" }
       },
-      { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 420 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik", status: "online" } },
-      { id: "immich", type: "cardNode", position: { x: 280, y: 420 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "immich", status: "online" } },
-      { id: "seafile", type: "cardNode", position: { x: 500, y: 420 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "seafile", status: "online" } },
-      { id: "paperless", type: "cardNode", position: { x: 720, y: 420 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "paperless", status: "online" } },
-      { id: "authentik", type: "cardNode", position: { x: 60, y: 540 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "authentik", status: "online" } },
-      { id: "forgejo", type: "cardNode", position: { x: 280, y: 540 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "forgejo", status: "online" } },
-      { id: "openwebui", type: "cardNode", position: { x: 500, y: 540 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "openwebui", status: "online" } },
-      { id: "affine", type: "cardNode", position: { x: 720, y: 540 }, data: { title: "Affine", subtitle: "Knowledge Workspace", icon: "affine", status: "online" } },
+      { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 420 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik" } },
+      { id: "immich", type: "cardNode", position: { x: 280, y: 420 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "immich" } },
+      { id: "seafile", type: "cardNode", position: { x: 500, y: 420 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "seafile" } },
+      { id: "paperless", type: "cardNode", position: { x: 720, y: 420 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "paperless" } },
+      { id: "authentik", type: "cardNode", position: { x: 60, y: 540 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "authentik" } },
+      { id: "forgejo", type: "cardNode", position: { x: 280, y: 540 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "forgejo" } },
+      { id: "openwebui", type: "cardNode", position: { x: 500, y: 540 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "openwebui" } },
+      { id: "affine", type: "cardNode", position: { x: 720, y: 540 }, data: { title: "Affine", subtitle: "Knowledge Workspace", icon: "affine" } },
 
       // --- Subgroup B: docker2 (Stateless) ---
       {
@@ -195,8 +181,8 @@ export function TopologyFlow() {
         style: { width: 440, height: 160 },
         data: { label: "docker2 (Stateless)" }
       },
-      { id: "grafana", type: "cardNode", position: { x: 60, y: 770 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
-      { id: "prometheus", type: "cardNode", position: { x: 270, y: 770 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
+      { id: "grafana", type: "cardNode", position: { x: 60, y: 770 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana" } },
+      { id: "prometheus", type: "cardNode", position: { x: 270, y: 770 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus" } },
 
       // --- Subgroup C: Talos K8s Cluster ---
       {
@@ -206,8 +192,8 @@ export function TopologyFlow() {
         style: { width: 460, height: 160 },
         data: { label: "Talos K8s Cluster" }
       },
-      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 770 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
-      { id: "flux", type: "cardNode", position: { x: 730, y: 770 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
+      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 770 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik" } },
+      { id: "flux", type: "cardNode", position: { x: 730, y: 770 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux" } },
 
       // --- Separate VM Subgroup D1: Home-Assistant HAOS (Dedicated VM) ---
       {
@@ -217,7 +203,7 @@ export function TopologyFlow() {
         style: { width: 230, height: 160 },
         data: { label: "Home-Assistant (VM)" }
       },
-      { id: "hass", type: "cardNode", position: { x: 60, y: 940 }, data: { title: "Home-Assistant", subtitle: "HAOS OS", icon: "hass", status: "online" } },
+      { id: "hass", type: "cardNode", position: { x: 60, y: 940 }, data: { title: "Home-Assistant", subtitle: "HAOS OS", icon: "hass" } },
 
       // --- Separate VM Subgroup D2: Minecraft Server (Dedicated VM) ---
       {
@@ -227,7 +213,7 @@ export function TopologyFlow() {
         style: { width: 230, height: 160 },
         data: { label: "minecraft (VM)" }
       },
-      { id: "minecraft", type: "cardNode", position: { x: 300, y: 940 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller", icon: "minecraft", status: "online" } },
+      { id: "minecraft", type: "cardNode", position: { x: 300, y: 940 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller", icon: "minecraft" } },
 
       // --- Separate Top-Level Network: VLAN 99 (Secure VPN Network) ---
       {
@@ -237,8 +223,8 @@ export function TopologyFlow() {
         style: { width: 430, height: 160 },
         data: { label: "VLAN 99 (Tailscale VPN)" }
       },
-      { id: "tailscale", type: "cardNode", position: { x: 550, y: 940 }, data: { title: "Tailscale Gateway", subtitle: "LXC Container", icon: "tailscale", status: "online" } },
-      { id: "adguard", type: "cardNode", position: { x: 750, y: 940 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } }
+      { id: "tailscale", type: "cardNode", position: { x: 550, y: 940 }, data: { title: "Tailscale Gateway", subtitle: "LXC Container", icon: "tailscale" } },
+      { id: "adguard", type: "cardNode", position: { x: 750, y: 940 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard" } }
     ],
     []
   );
