@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useTheme } from "next-themes";
 import { ZoomIn, ZoomOut, RotateCcw, Move } from "lucide-react";
 
@@ -15,6 +15,9 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   const [svgContent, setSvgContent] = useState<string>("");
   const [mounted, setMounted] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(1);
+  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const handleZoomIn = () => {
     setZoomLevel((prev) => Math.min(prev + 0.35, 5.0));
@@ -26,6 +29,52 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
 
   const handleReset = () => {
     setZoomLevel(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  // Mouse Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+    dragStartRef.current = {
+      x: e.clientX - pan.x,
+      y: e.clientY - pan.y
+    };
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setPan({
+      x: e.clientX - dragStartRef.current.x,
+      y: e.clientY - dragStartRef.current.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Touch Drag handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      setIsDragging(true);
+      dragStartRef.current = {
+        x: e.touches[0].clientX - pan.x,
+        y: e.touches[0].clientY - pan.y
+      };
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    setPan({
+      x: e.touches[0].clientX - dragStartRef.current.x,
+      y: e.touches[0].clientY - dragStartRef.current.y
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
   };
 
   useEffect(() => {
@@ -95,7 +144,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   }
 
   return (
-    <div className="relative w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden group">
+    <div className="relative w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden group select-none">
       {/* Zoom Controls Bar */}
       <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/90 backdrop-blur-md border border-border rounded-lg p-1 shadow-md font-mono text-xs">
         <button
@@ -125,27 +174,40 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
         <button
           onClick={handleReset}
           className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
-          title="Reset Zoom"
-          aria-label="Reset Zoom"
+          title="Reset Zoom & Pan"
+          aria-label="Reset Zoom & Pan"
         >
           <RotateCcw className="w-3.5 h-3.5" />
         </button>
       </div>
 
-      {/* Scrollable & Zoomable Container */}
-      <div className="w-full overflow-auto p-4 sm:p-8 min-h-[400px] flex items-center justify-center cursor-grab active:cursor-grabbing selection:bg-blue-500/20">
+      {/* Draggable & Zoomable Viewport */}
+      <div 
+        className={`w-full overflow-hidden p-4 sm:p-8 min-h-[450px] flex items-center justify-center ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div 
           ref={containerRef}
-          className="transition-transform duration-200 ease-out origin-center flex justify-center [&_svg]:min-w-[650px] sm:[&_svg]:min-w-[800px] [&_svg]:h-auto text-center"
-          style={{ transform: `scale(${zoomLevel})` }}
+          className="transition-transform duration-100 ease-out origin-center flex justify-center [&_svg]:min-w-[650px] sm:[&_svg]:min-w-[850px] [&_svg]:h-auto text-center"
+          style={{ 
+            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoomLevel})` 
+          }}
           dangerouslySetInnerHTML={{ __html: svgContent }}
         />
       </div>
 
-      {/* Mobile Hint Overlay */}
+      {/* Mobile & Mouse Drag Hint Overlay */}
       <div className="absolute bottom-2 left-3 z-10 flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/70 pointer-events-none">
         <Move className="w-3 h-3" />
-        <span>Pinch or click + / - to zoom (up to 500%)</span>
+        <span>Click & drag to pan • + / - to zoom</span>
       </div>
     </div>
   );
