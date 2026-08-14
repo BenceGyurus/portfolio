@@ -6,12 +6,12 @@ import { MermaidDiagram } from "@/components/MermaidDiagram";
 const HOMELAB_MERMAID_CHART = `
 graph TD
     Internet[Internet Public Traffic] --> Cloudflare[cloudflare-tunnel LXC 106]
-    Cloudflare --> Traefik[loadbalancer Traefik VM 600]
+    Cloudflare --> MainTraefik[loadbalancer Main Traefik Reverse Proxy VM 600]
     
     subgraph Proxmox [Proxmox VE Hypervisor]
         
         subgraph DockerMain ["docker-vm (VM 103) - Main Docker Host (4TB)"]
-            Traefik --> DockerTraefik[Dedicated Docker Traefik]
+            MainTraefik --> DockerTraefik[Dedicated Docker Traefik]
             DockerTraefik --> Immich[Immich - Photo Storage]
             DockerTraefik --> Seafile[Seafile - Cloud Storage]
             DockerTraefik --> Paperless[Paperless-ngx - Documents]
@@ -22,13 +22,14 @@ graph TD
         end
         
         subgraph DockerStateless ["docker2 (VM 112) - Stateless & Monitoring"]
-            Traefik --> Grafana[Grafana - Dashboards]
-            Traefik --> Prometheus[Prometheus - Metrics]
+            MainTraefik --> Grafana[Grafana - Dashboards]
+            MainTraefik --> Prometheus[Prometheus - Metrics]
         end
         
-        subgraph K8sCluster ["Talos K8s Cluster"]
-            Traefik --> TalosCP[talos-controlplane VM 120]
-            Traefik --> TalosWorker[talos-worker VM 121]
+        subgraph K8sCluster ["Talos K8s Cluster (Bare-Metal)"]
+            MainTraefik --> K8sTraefik[Internal K8s Traefik Ingress Controller]
+            K8sTraefik --> TalosCP[talos-controlplane VM 120]
+            K8sTraefik --> TalosWorker[talos-worker VM 121]
             TalosCP --- TalosWorker
             TalosWorker --> Flux[Flux CD - GitOps Engine]
         end
