@@ -30,8 +30,8 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
     const viewportWidth = viewport.clientWidth;
     const viewportHeight = viewport.clientHeight;
 
-    const maxX = Math.max(80, (contentWidth - viewportWidth) / 2 + 150);
-    const maxY = Math.max(80, (contentHeight - viewportHeight) / 2 + 150);
+    const maxX = Math.max(80, (contentWidth - viewportWidth) / 2 + 200);
+    const maxY = Math.max(80, (contentHeight - viewportHeight) / 2 + 200);
 
     return {
       x: Math.min(Math.max(rawX, -maxX), maxX),
@@ -40,11 +40,11 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   }, []);
 
   const handleZoomIn = () => {
-    setZoomLevel((prev) => Math.min(prev + 0.3, 4.0));
+    setZoomLevel((prev) => Math.min(prev + 0.35, 5.0));
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prev) => Math.max(prev - 0.3, 0.5));
+    setZoomLevel((prev) => Math.max(prev - 0.35, 0.4));
   };
 
   const handleReset = () => {
@@ -52,23 +52,28 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
     setPan({ x: 0, y: 0 });
   };
 
-  // Mouse Wheel Zoom
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Mouse Wheel Zoom (attached when viewport DOM element is mounted)
+  useEffect(() => {
+    if (!mounted || !svgContent) return;
     const viewport = viewportRef.current;
     if (!viewport) return;
 
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY;
-      const zoomFactor = delta < 0 ? 1.1 : 0.9;
-      setZoomLevel((prev) => Math.min(Math.max(prev * zoomFactor, 0.5), 4.0));
+      const zoomFactor = delta < 0 ? 1.12 : 0.88;
+      setZoomLevel((prev) => Math.min(Math.max(prev * zoomFactor, 0.4), 5.0));
     };
 
     viewport.addEventListener("wheel", onWheel, { passive: false });
     return () => {
       viewport.removeEventListener("wheel", onWheel);
     };
-  }, []);
+  }, [mounted, svgContent]);
 
   // Mouse Drag handlers
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -112,10 +117,6 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   const handleTouchEnd = () => {
     setIsDragging(false);
   };
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!mounted) return;

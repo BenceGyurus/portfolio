@@ -5,7 +5,6 @@ import { Infrastructure } from "@/components/sections/Infrastructure";
 import { OpenSource } from "@/components/sections/OpenSource";
 import { TechStack } from "@/components/sections/TechStack";
 import { Experience } from "@/components/sections/Experience";
-import { BlogPreview } from "@/components/sections/BlogPreview";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -30,7 +29,6 @@ export default async function Home({
         <Experience dict={dict.experience} />
         <TechStack dict={dict.techStack} />
         <OpenSource dict={dict.openSource} />
-        <BlogPreview dict={dict.blog} />
         <Contact dict={dict.contact} />
         <Footer dict={dict.footer} />
       </div>
