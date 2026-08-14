@@ -5,10 +5,10 @@ import { MermaidDiagram } from "@/components/MermaidDiagram";
 
 const HOMELAB_MERMAID_CHART = `
 graph TD
-    Internet[Internet Public Traffic] --> Cloudflare[cloudflare-tunnel]
-    Cloudflare --> MainTraefik[loadbalancer - Main Traefik Reverse Proxy]
+    Internet[Internet Public Traffic] --> Cloudflare[cloudflare-tunnel LXC]
     
     subgraph Proxmox [Proxmox VE Hypervisor]
+        Cloudflare --> MainTraefik[loadbalancer - Main Traefik Reverse Proxy LXC]
         
         subgraph DockerMain ["docker-vm - Main Docker Host (4TB)"]
             MainTraefik --> DockerTraefik[Dedicated Docker Traefik]
@@ -34,8 +34,8 @@ graph TD
             TalosWorker --> Flux[Flux CD - GitOps Engine]
         end
         
-        subgraph VLAN99 ["VLAN 99 - Secure VPN Network"]
-            Tailscale[vpn - Tailscale Gateway] --> AdGuard[adguard-home - DNS Server]
+        subgraph VLAN99 ["VLAN 99 - Secure Network"]
+            Tailscale[vpn - Tailscale Gateway LXC] --> AdGuard[adguard-home - DNS Server LXC]
         end
         
         subgraph DedicatedVMs ["Dedicated Service VMs"]
