@@ -130,28 +130,29 @@ export function TopologyFlow() {
         position: { x: 390, y: 20 },
         data: { title: "Public Internet", subtitle: "Global Traffic", icon: "internet", status: "online" }
       },
-      // 2. Cloudflare Tunnel LXC
-      {
-        id: "cloudflare",
-        type: "cardNode",
-        position: { x: 390, y: 110 },
-        data: { title: "cloudflare-tunnel", subtitle: "LXC Container", icon: "cloudflare", status: "online" }
-      },
 
-      // 3. Proxmox Container Group
+      // 2. Proxmox Container Group
       {
         id: "proxmox",
         type: "groupNode",
-        position: { x: 20, y: 200 },
-        style: { width: 960, height: 970 },
+        position: { x: 20, y: 110 },
+        style: { width: 960, height: 1060 },
         data: { label: "Proxmox VE Hypervisor", tag: "Bare-Metal Host" }
+      },
+
+      // Cloudflare Tunnel LXC inside Proxmox
+      {
+        id: "cloudflare",
+        type: "cardNode",
+        position: { x: 390, y: 160 },
+        data: { title: "cloudflare-tunnel", subtitle: "LXC Container", icon: "cloudflare", status: "online" }
       },
 
       // Main Loadbalancer LXC inside Proxmox
       {
         id: "main-lb",
         type: "cardNode",
-        position: { x: 390, y: 250 },
+        position: { x: 390, y: 260 },
         data: { title: "loadbalancer", subtitle: "Traefik Reverse Proxy LXC", icon: "traefik", status: "online" }
       },
 
@@ -159,62 +160,62 @@ export function TopologyFlow() {
       {
         id: "docker-group",
         type: "groupNode",
-        position: { x: 40, y: 350 },
+        position: { x: 40, y: 360 },
         style: { width: 920, height: 320 },
         data: { label: "docker-vm", tag: "4TB Stateful Storage" }
       },
-      { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 410 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik", status: "online" } },
-      { id: "immich", type: "cardNode", position: { x: 280, y: 410 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "docker", status: "online" } },
-      { id: "seafile", type: "cardNode", position: { x: 500, y: 410 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "docker", status: "online" } },
-      { id: "paperless", type: "cardNode", position: { x: 720, y: 410 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "docker", status: "online" } },
-      { id: "authentik", type: "cardNode", position: { x: 60, y: 530 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "docker", status: "online" } },
-      { id: "forgejo", type: "cardNode", position: { x: 280, y: 530 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "docker", status: "online" } },
-      { id: "openwebui", type: "cardNode", position: { x: 500, y: 530 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "docker", status: "online" } },
-      { id: "affine", type: "cardNode", position: { x: 720, y: 530 }, data: { title: "Affine", subtitle: "Knowledge Workspace", icon: "docker", status: "online" } },
+      { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 420 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik", status: "online" } },
+      { id: "immich", type: "cardNode", position: { x: 280, y: 420 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "docker", status: "online" } },
+      { id: "seafile", type: "cardNode", position: { x: 500, y: 420 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "docker", status: "online" } },
+      { id: "paperless", type: "cardNode", position: { x: 720, y: 420 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "docker", status: "online" } },
+      { id: "authentik", type: "cardNode", position: { x: 60, y: 540 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "docker", status: "online" } },
+      { id: "forgejo", type: "cardNode", position: { x: 280, y: 540 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "docker", status: "online" } },
+      { id: "openwebui", type: "cardNode", position: { x: 500, y: 540 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "docker", status: "online" } },
+      { id: "affine", type: "cardNode", position: { x: 720, y: 540 }, data: { title: "Affine", subtitle: "Knowledge Workspace", icon: "docker", status: "online" } },
 
       // --- Subgroup B: docker2 (Stateless) ---
       {
         id: "docker2-group",
         type: "groupNode",
-        position: { x: 40, y: 700 },
+        position: { x: 40, y: 710 },
         style: { width: 440, height: 210 },
         data: { label: "docker2", tag: "Stateless & Monitoring" }
       },
-      { id: "grafana", type: "cardNode", position: { x: 60, y: 760 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
-      { id: "prometheus", type: "cardNode", position: { x: 270, y: 760 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
+      { id: "grafana", type: "cardNode", position: { x: 60, y: 770 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
+      { id: "prometheus", type: "cardNode", position: { x: 270, y: 770 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
 
       // --- Subgroup C: Talos K8s Cluster ---
       {
         id: "k8s-group",
         type: "groupNode",
-        position: { x: 500, y: 700 },
+        position: { x: 500, y: 710 },
         style: { width: 460, height: 210 },
         data: { label: "Talos K8s Cluster", tag: "Kubernetes" }
       },
-      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 760 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
-      { id: "flux", type: "cardNode", position: { x: 730, y: 760 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
+      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 770 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
+      { id: "flux", type: "cardNode", position: { x: 730, y: 770 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
 
       // --- Subgroup D: Main VLAN Dedicated Service VMs ---
       {
         id: "dedicated-vms-group",
         type: "groupNode",
-        position: { x: 40, y: 930 },
+        position: { x: 40, y: 940 },
         style: { width: 440, height: 210 },
         data: { label: "Dedicated Service VMs", tag: "Main VLAN" }
       },
-      { id: "hass", type: "cardNode", position: { x: 60, y: 990 }, data: { title: "Home-Assistant", subtitle: "HAOS VM", icon: "hass", status: "online" } },
-      { id: "minecraft", type: "cardNode", position: { x: 270, y: 990 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller VM", icon: "minecraft", status: "online" } },
+      { id: "hass", type: "cardNode", position: { x: 60, y: 1000 }, data: { title: "Home-Assistant", subtitle: "HAOS VM", icon: "hass", status: "online" } },
+      { id: "minecraft", type: "cardNode", position: { x: 270, y: 1000 }, data: { title: "Minecraft Server", subtitle: "Crafty Controller VM", icon: "minecraft", status: "online" } },
 
       // --- Subgroup E: VLAN 99 Secure Network ---
       {
         id: "vlan99-group",
         type: "groupNode",
-        position: { x: 500, y: 930 },
+        position: { x: 500, y: 940 },
         style: { width: 460, height: 210 },
         data: { label: "VLAN 99 Network", tag: "Tailscale / VPN" }
       },
-      { id: "tailscale", type: "cardNode", position: { x: 520, y: 990 }, data: { title: "Tailscale Gateway", subtitle: "LXC (VLAN 99)", icon: "tailscale", status: "online" } },
-      { id: "adguard", type: "cardNode", position: { x: 730, y: 990 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } }
+      { id: "tailscale", type: "cardNode", position: { x: 520, y: 1000 }, data: { title: "Tailscale Gateway", subtitle: "LXC (VLAN 99)", icon: "tailscale", status: "online" } },
+      { id: "adguard", type: "cardNode", position: { x: 730, y: 1000 }, data: { title: "AdGuard Home", subtitle: "DNS Server LXC", icon: "adguard", status: "online" } }
     ],
     []
   );
