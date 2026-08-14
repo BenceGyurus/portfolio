@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useTheme } from "next-themes";
-import { ZoomIn, ZoomOut, RotateCcw, Move } from "lucide-react";
+import { ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 
 interface MermaidProps {
   chart: string;
@@ -30,8 +30,8 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
     const viewportWidth = viewport.clientWidth;
     const viewportHeight = viewport.clientHeight;
 
-    const maxX = Math.max(100, (contentWidth - viewportWidth) / 2 + 200);
-    const maxY = Math.max(100, (contentHeight - viewportHeight) / 2 + 200);
+    const maxX = Math.max(80, (contentWidth - viewportWidth) / 2 + 150);
+    const maxY = Math.max(80, (contentHeight - viewportHeight) / 2 + 150);
 
     return {
       x: Math.min(Math.max(rawX, -maxX), maxX),
@@ -40,11 +40,11 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   }, []);
 
   const handleZoomIn = () => {
-    setZoomLevel((prev) => Math.min(prev + 0.35, 5.0));
+    setZoomLevel((prev) => Math.min(prev + 0.3, 4.0));
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prev) => Math.max(prev - 0.35, 0.4));
+    setZoomLevel((prev) => Math.max(prev - 0.3, 0.5));
   };
 
   const handleReset = () => {
@@ -60,8 +60,8 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY;
-      const zoomFactor = delta < 0 ? 1.12 : 0.88;
-      setZoomLevel((prev) => Math.min(Math.max(prev * zoomFactor, 0.4), 5.0));
+      const zoomFactor = delta < 0 ? 1.1 : 0.9;
+      setZoomLevel((prev) => Math.min(Math.max(prev * zoomFactor, 0.5), 4.0));
     };
 
     viewport.addEventListener("wheel", onWheel, { passive: false });
@@ -180,47 +180,47 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   }
 
   return (
-    <div className="relative w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden group select-none">
-      {/* Zoom Controls Bar */}
-      <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/90 backdrop-blur-md border border-border rounded-lg p-1 shadow-md font-mono text-xs">
+    <div className="relative w-full rounded-xl border border-border bg-card/40 backdrop-blur-xs overflow-hidden group select-none">
+      {/* Sleek Minimal Zoom Controls Bar */}
+      <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/80 backdrop-blur-md border border-border rounded-lg p-1 shadow-xs font-mono text-xs">
         <button
           onClick={handleZoomOut}
           className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
-          title="Zoom Out (-)"
+          title="Zoom Out"
           aria-label="Zoom Out"
         >
-          <ZoomOut className="w-4 h-4" />
+          <ZoomOut className="w-3.5 h-3.5" />
         </button>
 
-        <span className="px-2 text-[11px] font-bold text-muted-foreground min-w-[50px] text-center select-none">
+        <span className="px-1.5 text-[11px] font-medium text-muted-foreground min-w-[42px] text-center select-none">
           {Math.round(zoomLevel * 100)}%
         </span>
 
         <button
           onClick={handleZoomIn}
           className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
-          title="Zoom In (+)"
+          title="Zoom In"
           aria-label="Zoom In"
         >
-          <ZoomIn className="w-4 h-4" />
+          <ZoomIn className="w-3.5 h-3.5" />
         </button>
 
-        <div className="h-4 w-px bg-border mx-0.5"></div>
+        <div className="h-3 w-px bg-border mx-0.5"></div>
 
         <button
           onClick={handleReset}
           className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
-          title="Reset Zoom & Pan"
-          aria-label="Reset Zoom & Pan"
+          title="Reset"
+          aria-label="Reset"
         >
-          <RotateCcw className="w-3.5 h-3.5" />
+          <RotateCcw className="w-3 h-3" />
         </button>
       </div>
 
       {/* Draggable & Wheel Zoom Viewport */}
       <div 
         ref={viewportRef}
-        className={`w-full overflow-hidden p-4 sm:p-8 min-h-[450px] flex items-center justify-center ${
+        className={`w-full overflow-hidden p-4 sm:p-8 min-h-[420px] flex items-center justify-center ${
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         onMouseDown={handleMouseDown}
@@ -240,12 +240,6 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
           }}
           dangerouslySetInnerHTML={{ __html: svgContent }}
         />
-      </div>
-
-      {/* Mobile & Mouse Drag Hint Overlay */}
-      <div className="absolute bottom-2 left-3 z-10 flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/70 pointer-events-none">
-        <Move className="w-3 h-3" />
-        <span>Scroll wheel to zoom • Click & drag to pan</span>
       </div>
     </div>
   );
