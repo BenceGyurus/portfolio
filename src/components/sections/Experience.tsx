@@ -30,10 +30,7 @@ export function Experience({ dict }: { dict: any }) {
 
   return (
     <section className="py-16 border-t border-border">
-      <div className="flex items-center gap-2 mb-10">
-        <Briefcase className="w-5 h-5 text-blue-500" />
-        <h2 className="text-2xl font-bold tracking-tight text-foreground">{dict.title}</h2>
-      </div>
+      <h2 className="text-2xl font-bold tracking-tight mb-8 text-foreground">{dict.title}</h2>
 
       <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-3 sm:before:left-4 before:top-3 before:bottom-3 before:w-0.5 before:bg-border/60">
         {experiences.map((item, index) => {
