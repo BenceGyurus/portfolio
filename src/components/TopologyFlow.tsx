@@ -25,20 +25,20 @@ import {
   SiAdguard,
   SiGrafana,
   SiPrometheus,
-  SiFlux
+  SiFlux,
+  SiImmich,
+  SiSeafile,
+  SiPaperlessngx,
+  SiAuthentik,
+  SiForgejo,
+  SiAffine
 } from "react-icons/si";
 import { 
   Globe, 
   Gamepad2, 
   Mail, 
   Layers,
-  Image as ImageIcon,
-  HardDrive,
-  FileText,
-  ShieldCheck,
-  GitBranch,
-  Bot,
-  LayoutGrid
+  Bot
 } from "lucide-react";
 
 type GroupData = Node<{ label: string }>;
@@ -76,13 +76,13 @@ function CardNode({ data }: NodeProps<CardData>) {
       case "grafana": return <SiGrafana className="w-4 h-4 text-[#F46800]" />;
       case "prometheus": return <SiPrometheus className="w-4 h-4 text-[#E6522C]" />;
       case "flux": return <SiFlux className="w-4 h-4 text-[#50668F]" />;
-      case "immich": return <ImageIcon className="w-4 h-4 text-purple-500" />;
-      case "seafile": return <HardDrive className="w-4 h-4 text-blue-500" />;
-      case "paperless": return <FileText className="w-4 h-4 text-emerald-500" />;
-      case "authentik": return <ShieldCheck className="w-4 h-4 text-amber-500" />;
-      case "forgejo": return <GitBranch className="w-4 h-4 text-rose-500" />;
-      case "openwebui": return <Bot className="w-4 h-4 text-teal-500" />;
-      case "affine": return <LayoutGrid className="w-4 h-4 text-indigo-500" />;
+      case "immich": return <SiImmich className="w-4 h-4 text-[#8957E5]" />;
+      case "seafile": return <SiSeafile className="w-4 h-4 text-[#00A8E8]" />;
+      case "paperless": return <SiPaperlessngx className="w-4 h-4 text-[#17A2B8]" />;
+      case "authentik": return <SiAuthentik className="w-4 h-4 text-[#FD4F00]" />;
+      case "forgejo": return <SiForgejo className="w-4 h-4 text-[#F05032]" />;
+      case "openwebui": return <Bot className="w-4 h-4 text-[#10A37F]" />;
+      case "affine": return <SiAffine className="w-4 h-4 text-[#0052FF]" />;
       case "minecraft": return <Gamepad2 className="w-4 h-4 text-emerald-500" />;
       case "mail": return <Mail className="w-4 h-4 text-amber-500" />;
       case "internet": return <Globe className="w-4 h-4 text-blue-500" />;
@@ -195,8 +195,8 @@ export function TopologyFlow() {
         style: { width: 440, height: 160 },
         data: { label: "docker2 (Stateless)" }
       },
-      { id: "grafana", type: "cardNode", position: { x: 60, y: 760 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
-      { id: "prometheus", type: "cardNode", position: { x: 270, y: 760 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
+      { id: "grafana", type: "cardNode", position: { x: 60, y: 770 }, data: { title: "Grafana", subtitle: "Dashboards & Alerts", icon: "grafana", status: "online" } },
+      { id: "prometheus", type: "cardNode", position: { x: 270, y: 770 }, data: { title: "Prometheus", subtitle: "Metrics Storage", icon: "prometheus", status: "online" } },
 
       // --- Subgroup C: Talos K8s Cluster ---
       {
@@ -206,8 +206,8 @@ export function TopologyFlow() {
         style: { width: 460, height: 160 },
         data: { label: "Talos K8s Cluster" }
       },
-      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 760 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
-      { id: "flux", type: "cardNode", position: { x: 730, y: 760 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
+      { id: "k8s-ingress", type: "cardNode", position: { x: 520, y: 770 }, data: { title: "Internal K8s Traefik", subtitle: "Ingress Controller", icon: "traefik", status: "online" } },
+      { id: "flux", type: "cardNode", position: { x: 730, y: 770 }, data: { title: "Flux CD", subtitle: "GitOps Engine", icon: "flux", status: "online" } },
 
       // --- Separate VM Subgroup D1: Home-Assistant HAOS (Dedicated VM) ---
       {
