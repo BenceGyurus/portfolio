@@ -1,0 +1,130 @@
+{
+  "overall": {
+    "status": "operational",
+    "uptime30d": 99.96,
+    "uptime90d": 99.92,
+    "lastUpdated": "2026-08-14T14:45:00Z"
+  },
+  "telemetry": {
+    "cpuLoad": 18,
+    "ramUsage": 62,
+    "ramTotalGB": 64,
+    "ramUsedGB": 39.6,
+    "storageTotalTB": 4.0,
+    "storageUsedTB": 2.7,
+    "activeContainers": 32,
+    "totalVMs": 11
+  },
+  "coreInfra": [
+    {
+      "id": "proxmox",
+      "name": "Proxmox VE Cluster",
+      "type": "Hypervisor",
+      "status": "online",
+      "latencyMs": 4,
+      "uptimePercent": 99.99,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "docker-main",
+      "name": "docker-vm (VM 103)",
+      "type": "Main Docker Host",
+      "status": "online",
+      "latencyMs": 7,
+      "uptimePercent": 99.95,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "talos-k8s",
+      "name": "Talos K8s Cluster",
+      "type": "Bare-Metal Kubernetes",
+      "status": "online",
+      "latencyMs": 12,
+      "uptimePercent": 99.88,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "tailscale-vpn",
+      "name": "Tailscale Mesh VPN",
+      "type": "Zero-Trust Gateway",
+      "status": "online",
+      "latencyMs": 15,
+      "uptimePercent": 100.0,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    }
+  ],
+  "publicServices": [
+    {
+      "id": "immich",
+      "name": "Immich",
+      "category": "Media Storage",
+      "status": "online",
+      "latencyMs": 24,
+      "uptimePercent": 100.0,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "seafile",
+      "name": "Seafile",
+      "category": "Cloud Storage",
+      "status": "online",
+      "latencyMs": 32,
+      "uptimePercent": 99.98,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "paperless",
+      "name": "Paperless-ngx",
+      "category": "Document Management",
+      "status": "online",
+      "latencyMs": 28,
+      "uptimePercent": 99.90,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "authentik",
+      "name": "Authentik",
+      "category": "Identity & SSO",
+      "status": "online",
+      "latencyMs": 18,
+      "uptimePercent": 99.99,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "forgejo",
+      "name": "Forgejo",
+      "category": "Git Hosting",
+      "status": "online",
+      "latencyMs": 22,
+      "uptimePercent": 100.0,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "openwebui",
+      "name": "OpenWebUI",
+      "category": "AI Workspace",
+      "status": "online",
+      "latencyMs": 45,
+      "uptimePercent": 99.85,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "adguard",
+      "name": "AdGuard Home",
+      "category": "DNS & Filtering",
+      "status": "online",
+      "latencyMs": 5,
+      "uptimePercent": 100.0,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana & Prometheus",
+      "category": "Observability",
+      "status": "online",
+      "latencyMs": 19,
+      "uptimePercent": 99.95,
+      "heartbeat": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+    }
+  ]
+}
