@@ -4,25 +4,34 @@ import React, { useState, useEffect, useCallback } from "react";
 import { 
   RotateCw, 
   ExternalLink,
-  AlertCircle
+  AlertCircle,
+  Wrench
 } from "lucide-react";
+
+interface MaintenanceItem {
+  id: number;
+  title: string;
+  description?: string;
+  active: boolean;
+}
 
 interface StatusItem {
   id: string;
   name: string;
   category?: string;
-  status: "online" | "degraded" | "offline";
+  status: "online" | "maintenance" | "degraded" | "offline";
   latencyMs: number;
   uptimePercent: number;
-  heartbeat: number[]; // 1 = up, 0 = down
+  heartbeat: number[]; // 1 = up, 3 = maintenance, 0 = down
 }
 
 interface TelemetryData {
   overall: {
-    status: "operational" | "degraded" | "outage";
+    status: "operational" | "maintenance" | "degraded" | "outage";
     uptime30d: number;
     lastUpdated: string;
   };
+  maintenances: MaintenanceItem[];
   publicServices: StatusItem[];
 }
 
@@ -51,6 +60,8 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
     }
 
     let monitorNames: Record<string, { name: string; group: string }> = {};
+    let activeMaintenances: MaintenanceItem[] = [];
+
     if (pageRes && pageRes.ok) {
       try {
         const pageJson = await pageRes.json();
@@ -63,8 +74,16 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
             }
           });
         }
+        if (pageJson.maintenanceList && Array.isArray(pageJson.maintenanceList)) {
+          activeMaintenances = pageJson.maintenanceList.map((m: any) => ({
+            id: m.id,
+            title: m.title || "Scheduled Maintenance",
+            description: m.description || "",
+            active: m.active ?? true
+          }));
+        }
       } catch (e) {
-        console.warn("Could not parse monitor names", e);
+        console.warn("Could not parse page config", e);
       }
     }
 
@@ -72,16 +91,25 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
     const parsedServices: StatusItem[] = Object.keys(kumaHeartbeats).map((id) => {
       const beats = kumaHeartbeats[id] || [];
       const lastBeat = beats[beats.length - 1] || {};
-      const isUp = lastBeat.status === 1;
+      
+      let status: "online" | "maintenance" | "degraded" | "offline" = "online";
+      if (lastBeat.status === 3) {
+        status = "maintenance";
+      } else if (lastBeat.status === 0) {
+        status = "offline";
+      } else if (lastBeat.status !== 1) {
+        status = "degraded";
+      }
+
       const ping = lastBeat.ping ?? 12;
-      const heartbeatArr = beats.slice(-24).map((b: any) => (b.status === 1 ? 1 : 0));
+      const heartbeatArr = beats.slice(-24).map((b: any) => (b.status === 1 ? 1 : b.status === 3 ? 3 : 0));
       const info = monitorNames[id] || { name: `Service #${id}`, group: "Services" };
 
       return {
         id: String(id),
         name: info.name,
         category: info.group,
-        status: isUp ? "online" : "offline",
+        status: status,
         latencyMs: ping,
         uptimePercent: 99.9,
         heartbeat: heartbeatArr.length < 24 
@@ -90,14 +118,16 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
       };
     });
 
+    const isMaintenance = activeMaintenances.length > 0 || parsedServices.some(s => s.status === "maintenance");
     const isAllUp = parsedServices.length > 0 && parsedServices.every(s => s.status === "online");
 
     return {
       overall: {
-        status: isAllUp ? "operational" : "degraded",
+        status: isMaintenance ? "maintenance" : isAllUp ? "operational" : "degraded",
         uptime30d: 99.96,
         lastUpdated: new Date().toISOString()
       },
+      maintenances: activeMaintenances,
       publicServices: parsedServices
     };
   };
@@ -124,7 +154,7 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
     return () => clearInterval(timer);
   }, [fetchData]);
 
-  const renderStatusBadge = (status: "operational" | "degraded" | "outage") => {
+  const renderStatusBadge = (status: "operational" | "maintenance" | "degraded" | "outage") => {
     if (status === "operational") {
       return (
         <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400">
@@ -133,6 +163,17 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
           All Systems Operational
+        </div>
+      );
+    }
+    if (status === "maintenance") {
+      return (
+        <div className="flex items-center gap-2 text-xs font-mono text-blue-600 dark:text-blue-400">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+          </span>
+          Maintenance in Progress
         </div>
       );
     }
@@ -187,6 +228,24 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
         </div>
       </div>
 
+      {/* Active Maintenance Banner */}
+      {data && data.maintenances && data.maintenances.length > 0 && (
+        <div className="space-y-2">
+          {data.maintenances.map((m) => (
+            <div 
+              key={m.id}
+              className="flex items-center gap-3 p-3.5 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-600 dark:text-blue-400 text-xs font-mono"
+            >
+              <Wrench className="w-4 h-4 text-blue-500 shrink-0" />
+              <div>
+                <span className="font-bold">{m.title}</span>
+                {m.description && <span className="text-muted-foreground ml-2">— {m.description}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Monitored Services Grid */}
       {data && data.publicServices.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -197,7 +256,13 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
             >
               <div className="flex items-center justify-between">
                 <span className="font-medium text-sm text-foreground truncate">{service.name}</span>
-                <span className={`flex h-2 w-2 rounded-full ${service.status === "online" ? "bg-emerald-500" : "bg-rose-500"}`}></span>
+                <span className={`flex h-2 w-2 rounded-full ${
+                  service.status === "online" 
+                    ? "bg-emerald-500" 
+                    : service.status === "maintenance"
+                    ? "bg-blue-500"
+                    : "bg-rose-500"
+                }`}></span>
               </div>
 
               <div className="flex justify-between items-center text-xs font-mono text-muted-foreground">
@@ -213,6 +278,8 @@ export function HomelabTelemetry({ dict }: { dict?: any }) {
                     className={`flex-1 h-full rounded-xs ${
                       val === 1 
                         ? "bg-emerald-500/80" 
+                        : val === 3
+                        ? "bg-blue-500/80"
                         : "bg-rose-500"
                     }`}
                   ></div>
