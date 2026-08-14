@@ -27,7 +27,19 @@ import {
   SiPrometheus,
   SiFlux
 } from "react-icons/si";
-import { Globe, Gamepad2, Mail, Layers } from "lucide-react";
+import { 
+  Globe, 
+  Gamepad2, 
+  Mail, 
+  Layers,
+  Image as ImageIcon,
+  HardDrive,
+  FileText,
+  ShieldCheck,
+  GitBranch,
+  Bot,
+  LayoutGrid
+} from "lucide-react";
 
 type GroupData = Node<{ label: string }>;
 type CardData = Node<{
@@ -64,6 +76,13 @@ function CardNode({ data }: NodeProps<CardData>) {
       case "grafana": return <SiGrafana className="w-4 h-4 text-[#F46800]" />;
       case "prometheus": return <SiPrometheus className="w-4 h-4 text-[#E6522C]" />;
       case "flux": return <SiFlux className="w-4 h-4 text-[#50668F]" />;
+      case "immich": return <ImageIcon className="w-4 h-4 text-purple-500" />;
+      case "seafile": return <HardDrive className="w-4 h-4 text-blue-500" />;
+      case "paperless": return <FileText className="w-4 h-4 text-emerald-500" />;
+      case "authentik": return <ShieldCheck className="w-4 h-4 text-amber-500" />;
+      case "forgejo": return <GitBranch className="w-4 h-4 text-rose-500" />;
+      case "openwebui": return <Bot className="w-4 h-4 text-teal-500" />;
+      case "affine": return <LayoutGrid className="w-4 h-4 text-indigo-500" />;
       case "minecraft": return <Gamepad2 className="w-4 h-4 text-emerald-500" />;
       case "mail": return <Mail className="w-4 h-4 text-amber-500" />;
       case "internet": return <Globe className="w-4 h-4 text-blue-500" />;
@@ -160,13 +179,13 @@ export function TopologyFlow() {
         data: { label: "docker-vm (4TB Stateful Storage)" }
       },
       { id: "docker-traefik", type: "cardNode", position: { x: 60, y: 420 }, data: { title: "Docker Traefik", subtitle: "Dedicated Container Proxy", icon: "traefik", status: "online" } },
-      { id: "immich", type: "cardNode", position: { x: 280, y: 420 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "docker", status: "online" } },
-      { id: "seafile", type: "cardNode", position: { x: 500, y: 420 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "docker", status: "online" } },
-      { id: "paperless", type: "cardNode", position: { x: 720, y: 420 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "docker", status: "online" } },
-      { id: "authentik", type: "cardNode", position: { x: 60, y: 540 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "docker", status: "online" } },
-      { id: "forgejo", type: "cardNode", position: { x: 280, y: 540 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "docker", status: "online" } },
-      { id: "openwebui", type: "cardNode", position: { x: 500, y: 540 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "docker", status: "online" } },
-      { id: "affine", type: "cardNode", position: { x: 720, y: 540 }, data: { title: "Affine", subtitle: "Knowledge Workspace", icon: "docker", status: "online" } },
+      { id: "immich", type: "cardNode", position: { x: 280, y: 420 }, data: { title: "Immich", subtitle: "Photo & Video Storage", icon: "immich", status: "online" } },
+      { id: "seafile", type: "cardNode", position: { x: 500, y: 420 }, data: { title: "Seafile", subtitle: "Cloud File Storage", icon: "seafile", status: "online" } },
+      { id: "paperless", type: "cardNode", position: { x: 720, y: 420 }, data: { title: "Paperless-ngx", subtitle: "Document Management", icon: "paperless", status: "online" } },
+      { id: "authentik", type: "cardNode", position: { x: 60, y: 540 }, data: { title: "Authentik", subtitle: "Identity & SSO Auth", icon: "authentik", status: "online" } },
+      { id: "forgejo", type: "cardNode", position: { x: 280, y: 540 }, data: { title: "Forgejo", subtitle: "Git Code Server", icon: "forgejo", status: "online" } },
+      { id: "openwebui", type: "cardNode", position: { x: 500, y: 540 }, data: { title: "OpenWebUI", subtitle: "AI Workspace", icon: "openwebui", status: "online" } },
+      { id: "affine", type: "cardNode", position: { x: 720, y: 540 }, data: { title: "Affine", subtitle: "Knowledge Workspace", icon: "affine", status: "online" } },
 
       // --- Subgroup B: docker2 (Stateless) ---
       {
