@@ -17,11 +17,11 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   const [zoomLevel, setZoomLevel] = useState<number>(1);
 
   const handleZoomIn = () => {
-    setZoomLevel((prev) => Math.min(prev + 0.25, 2.5));
+    setZoomLevel((prev) => Math.min(prev + 0.35, 5.0));
   };
 
   const handleZoomOut = () => {
-    setZoomLevel((prev) => Math.max(prev - 0.25, 0.5));
+    setZoomLevel((prev) => Math.max(prev - 0.35, 0.4));
   };
 
   const handleReset = () => {
@@ -97,7 +97,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   return (
     <div className="relative w-full rounded-xl border border-border bg-card/60 backdrop-blur-sm overflow-hidden group">
       {/* Zoom Controls Bar */}
-      <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/80 backdrop-blur-md border border-border rounded-lg p-1 shadow-sm font-mono text-xs">
+      <div className="absolute top-3 right-3 z-20 flex items-center gap-1 bg-background/90 backdrop-blur-md border border-border rounded-lg p-1 shadow-md font-mono text-xs">
         <button
           onClick={handleZoomOut}
           className="p-1.5 hover:bg-muted rounded text-muted-foreground hover:text-foreground transition-colors"
@@ -107,7 +107,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
           <ZoomOut className="w-4 h-4" />
         </button>
 
-        <span className="px-2 text-[11px] font-bold text-muted-foreground min-w-[45px] text-center select-none">
+        <span className="px-2 text-[11px] font-bold text-muted-foreground min-w-[50px] text-center select-none">
           {Math.round(zoomLevel * 100)}%
         </span>
 
@@ -133,10 +133,10 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
       </div>
 
       {/* Scrollable & Zoomable Container */}
-      <div className="w-full overflow-auto p-6 sm:p-10 min-h-[320px] flex items-center justify-center cursor-grab active:cursor-grabbing selection:bg-blue-500/20">
+      <div className="w-full overflow-auto p-4 sm:p-8 min-h-[400px] flex items-center justify-center cursor-grab active:cursor-grabbing selection:bg-blue-500/20">
         <div 
           ref={containerRef}
-          className="transition-transform duration-200 ease-out origin-center flex justify-center [&_svg]:max-w-none text-center"
+          className="transition-transform duration-200 ease-out origin-center flex justify-center [&_svg]:min-w-[650px] sm:[&_svg]:min-w-[800px] [&_svg]:h-auto text-center"
           style={{ transform: `scale(${zoomLevel})` }}
           dangerouslySetInnerHTML={{ __html: svgContent }}
         />
@@ -145,7 +145,7 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
       {/* Mobile Hint Overlay */}
       <div className="absolute bottom-2 left-3 z-10 flex items-center gap-1.5 text-[10px] font-mono text-muted-foreground/70 pointer-events-none">
         <Move className="w-3 h-3" />
-        <span>Use + / - to zoom topology diagram</span>
+        <span>Pinch or click + / - to zoom (up to 500%)</span>
       </div>
     </div>
   );
