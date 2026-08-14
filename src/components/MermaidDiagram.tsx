@@ -20,6 +20,25 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  const clampPan = useCallback((rawX: number, rawY: number, currentZoom: number) => {
+    const content = containerRef.current;
+    const viewport = viewportRef.current;
+    if (!content || !viewport) return { x: rawX, y: rawY };
+
+    const contentWidth = content.clientWidth * currentZoom;
+    const contentHeight = content.clientHeight * currentZoom;
+    const viewportWidth = viewport.clientWidth;
+    const viewportHeight = viewport.clientHeight;
+
+    const maxX = Math.max(100, (contentWidth - viewportWidth) / 2 + 200);
+    const maxY = Math.max(100, (contentHeight - viewportHeight) / 2 + 200);
+
+    return {
+      x: Math.min(Math.max(rawX, -maxX), maxX),
+      y: Math.min(Math.max(rawY, -maxY), maxY)
+    };
+  }, []);
+
   const handleZoomIn = () => {
     setZoomLevel((prev) => Math.min(prev + 0.35, 5.0));
   };
@@ -63,10 +82,9 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDragging) return;
-    setPan({
-      x: e.clientX - dragStartRef.current.x,
-      y: e.clientY - dragStartRef.current.y
-    });
+    const rawX = e.clientX - dragStartRef.current.x;
+    const rawY = e.clientY - dragStartRef.current.y;
+    setPan(clampPan(rawX, rawY, zoomLevel));
   };
 
   const handleMouseUp = () => {
@@ -86,10 +104,9 @@ export function MermaidDiagram({ chart, id = "homelab-topology-mermaid" }: Merma
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || e.touches.length !== 1) return;
-    setPan({
-      x: e.touches[0].clientX - dragStartRef.current.x,
-      y: e.touches[0].clientY - dragStartRef.current.y
-    });
+    const rawX = e.touches[0].clientX - dragStartRef.current.x;
+    const rawY = e.touches[0].clientY - dragStartRef.current.y;
+    setPan(clampPan(rawX, rawY, zoomLevel));
   };
 
   const handleTouchEnd = () => {
