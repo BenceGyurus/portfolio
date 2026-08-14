@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Rocket, Server, Calendar } from "lucide-react";
+import { GraduationCap, Rocket, Server, Calendar } from "lucide-react";
 
 export function Experience({ dict }: { dict: any }) {
   const experiences = [
