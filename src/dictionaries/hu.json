@@ -3,7 +3,7 @@
     "title": "Gyürüs Bence",
     "subtitle1": "Mérnökinformatikus hallgató @ BME",
     "subtitle2": "Linux infrastruktúra • Self-hosting • DevOps",
-    "description": "Megbízható infrastruktúrák és self-hosted rendszerek építése. Saját HomeLab-ot üzemeltetek Proxmox, Docker és Kubernetes alapokon, és egy barátommal közösen egy 3 node-os clustert is menedzselek.",
+    "description": "Saját Proxmox, Docker és Kubernetes alapú HomeLabot üzemeltetek, mellette egy barátommal közös szerverfürtöt menedzselünk. Érdekel a hálózatok világa, a Linux rendszerek és az automatizáció.",
     "locationLabel": "Hely:",
     "location": "Budapest",
     "educationLabel": "Tanulmányok:",
