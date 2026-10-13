@@ -70,7 +70,7 @@
     },
     "project3": {
       "title": "matekx.hu",
-      "desc": "Készülőben lévő matematika gyakorló platform. Témakörönként folyamatosan megújuló feladatokat, azonnali javítást és lépésről lépésre lebontott magyarázatokat biztosít diákoknak a felvételihez és az érettségihez.",
+      "desc": "Matematika gyakorló platform. Témakörönként folyamatosan megújuló feladatokat, azonnali javítást és lépésről lépésre lebontott magyarázatokat biztosít diákoknak a felvételihez és az érettségihez.",
       "focus1": "Végtelen feladatgenerálás",
       "focus2": "Azonnali értékelés",
       "focus3": "Lépésenkénti levezetések"

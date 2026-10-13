@@ -1,5 +1,4 @@
 import { ExternalLink } from "lucide-react";
-import { GithubIcon } from "@/components/Icons";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -39,7 +38,12 @@ export function Projects({ dict }: { dict: any }) {
 
             <div className="text-sm font-mono text-muted-foreground">{dict.links}</div>
             <div className="md:col-span-3 flex gap-4">
-              <Link href="https://irodalomerettsegi.hu" className="flex items-center gap-1 hover:text-blue-500 transition-colors">
+              <Link
+                href="https://irodalomerettsegi.hu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-blue-500 transition-colors"
+              >
                 <ExternalLink className="w-4 h-4" /> {dict.website}
               </Link>
             </div>
@@ -97,8 +101,8 @@ export function Projects({ dict }: { dict: any }) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
             <div className="text-sm font-mono text-muted-foreground">{dict.status}</div>
             <div className="md:col-span-3 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              {dict.inDevelopment}
+              <div className="w-2 h-2 rounded-full bg-green-500"></div>
+              {dict.active}
             </div>
             
             <div className="text-sm font-mono text-muted-foreground">{dict.description}</div>
@@ -115,9 +119,14 @@ export function Projects({ dict }: { dict: any }) {
 
             <div className="text-sm font-mono text-muted-foreground">{dict.links}</div>
             <div className="md:col-span-3 flex gap-4">
-              <span className="flex items-center gap-1 text-muted-foreground">
-                <ExternalLink className="w-4 h-4" /> matekx.hu
-              </span>
+              <Link
+                href="https://matekx.hu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-blue-500 transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" /> {dict.website}
+              </Link>
             </div>
           </div>
 
