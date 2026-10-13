@@ -9,7 +9,7 @@
     "educationLabel": "Tanulmányok:",
     "education": "BME VIK",
     "focusLabel": "Jelenlegi fókusz:",
-    "focuses": ["Agentic rendszerek", "Automatizáció"]
+    "focuses": ["Infrastruktúra", "Hálózatok", "Saját szerver", "Agentic rendszerek", "Automatizáció"]
   },
   "statusAndNow": {
     "statusLabel": "Rendszer Állapot",

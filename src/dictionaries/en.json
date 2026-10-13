@@ -9,7 +9,7 @@
     "educationLabel": "Education:",
     "education": "BME VIK",
     "focusLabel": "Current focus:",
-    "focuses": ["Agentic systems", "Automation"]
+    "focuses": ["Infrastructure", "Networking", "Self Hosting", "Agentic systems", "Automation"]
   },
   "statusAndNow": {
     "statusLabel": "System Status",
