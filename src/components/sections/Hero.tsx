@@ -58,9 +58,12 @@ export function Hero({ dict }: { dict: any }) {
           </div>
           <div>
             <span className="text-blue-400">{dict.focusLabel}</span><br />
-            {dict.focuses[0]}<br />
-            {dict.focuses[1]}<br />
-            {dict.focuses[2]}
+            {dict.focuses?.map((focus: string, idx: number) => (
+              <span key={focus}>
+                {focus}
+                {idx < dict.focuses.length - 1 && <br />}
+              </span>
+            ))}
           </div>
         </div>
       </div>
