@@ -72,83 +72,90 @@ const PAGE_API = "/api/homelab-page";
 
 const FALLBACK_TELEMETRY: TelemetryData = {
   overall: {
-    status: "operational",
+    status: "maintenance",
     uptime30d: 99.96,
-    lastUpdated: "2026-08-14T14:45:00Z"
+    lastUpdated: new Date().toISOString()
   },
-  maintenances: [],
+  maintenances: [
+    {
+      id: 23,
+      title: "Affine",
+      description: "Karbantartás alatt / Maintenance in progress",
+      active: true
+    }
+  ],
   publicServices: [
     {
-      id: "immich",
-      name: "Immich",
-      category: "Media Storage",
-      status: "online",
-      latencyMs: 24,
-      uptimePercent: 100.0,
-      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    },
-    {
-      id: "seafile",
-      name: "Seafile",
-      category: "Cloud Storage",
-      status: "online",
-      latencyMs: 32,
-      uptimePercent: 99.98,
-      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    },
-    {
-      id: "paperless",
-      name: "Paperless-ngx",
-      category: "Document Management",
-      status: "online",
-      latencyMs: 28,
-      uptimePercent: 99.90,
-      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    },
-    {
-      id: "authentik",
-      name: "Authentik",
-      category: "Identity & SSO",
+      id: "1",
+      name: "Immich remote",
+      category: "Services",
       status: "online",
       latencyMs: 18,
-      uptimePercent: 99.99,
+      uptimePercent: 99.9,
       heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     },
     {
-      id: "forgejo",
-      name: "Forgejo",
-      category: "Git Hosting",
+      id: "3",
+      name: "Home Assistant remote",
+      category: "Services",
+      status: "online",
+      latencyMs: 24,
+      uptimePercent: 99.9,
+      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      id: "4",
+      name: "Home Assistant local",
+      category: "Services",
+      status: "online",
+      latencyMs: 3,
+      uptimePercent: 100.0,
+      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      id: "5",
+      name: "Seafile remote",
+      category: "Services",
+      status: "online",
+      latencyMs: 28,
+      uptimePercent: 99.9,
+      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      id: "17",
+      name: "Auth",
+      category: "Auth",
+      status: "online",
+      latencyMs: 3,
+      uptimePercent: 100.0,
+      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      id: "18",
+      name: "Authentik szerver",
+      category: "Auth",
       status: "online",
       latencyMs: 22,
-      uptimePercent: 100.0,
+      uptimePercent: 99.9,
       heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     },
     {
-      id: "openwebui",
-      name: "OpenWebUI",
-      category: "AI Workspace",
+      id: "20",
+      name: "Authentik database",
+      category: "Auth",
       status: "online",
-      latencyMs: 45,
-      uptimePercent: 99.85,
+      latencyMs: 35,
+      uptimePercent: 99.9,
       heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     },
     {
-      id: "adguard",
-      name: "AdGuard Home",
-      category: "DNS & Filtering",
-      status: "online",
-      latencyMs: 5,
-      uptimePercent: 100.0,
-      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    },
-    {
-      id: "grafana",
-      name: "Grafana & Prometheus",
-      category: "Observability",
-      status: "online",
-      latencyMs: 19,
-      uptimePercent: 99.95,
-      heartbeat: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+      id: "23",
+      name: "Affine",
+      category: "Services",
+      status: "maintenance",
+      latencyMs: 0,
+      uptimePercent: 99.9,
+      heartbeat: [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
     }
   ],
   isLive: false
@@ -166,16 +173,28 @@ function getTimeoutSignal(ms: number): AbortSignal | undefined {
 }
 
 async function fetchKumaData(): Promise<TelemetryData> {
-  const [pageRes, hbRes] = await Promise.all([
+  let [pageRes, hbRes] = await Promise.all([
     fetch(PAGE_API, { 
-      headers: { "Cache-Control": "max-age=30" },
-      signal: getTimeoutSignal(3000)
+      headers: { "Cache-Control": "no-cache" },
+      signal: getTimeoutSignal(10000)
     }).catch(() => null),
     fetch(PRIMARY_API, { 
-      headers: { "Cache-Control": "max-age=15" },
-      signal: getTimeoutSignal(3000)
+      headers: { "Cache-Control": "no-cache" },
+      signal: getTimeoutSignal(10000)
     }).catch(() => null)
   ]);
+
+  // If local route handlers failed, fallback to direct fetch
+  if (!hbRes || !hbRes.ok) {
+    hbRes = await fetch("https://status.gyurus.hu/api/status-page/heartbeat/homelab", {
+      signal: getTimeoutSignal(10000)
+    }).catch(() => null);
+  }
+  if (!pageRes || !pageRes.ok) {
+    pageRes = await fetch("https://status.gyurus.hu/api/status-page/homelab", {
+      signal: getTimeoutSignal(10000)
+    }).catch(() => null);
+  }
 
   if (!hbRes || !hbRes.ok) {
     throw new Error("Status API offline");
@@ -228,7 +247,7 @@ async function fetchKumaData(): Promise<TelemetryData> {
       status = "degraded";
     }
 
-    const ping = lastBeat.ping ?? 12;
+    const ping = lastBeat.ping ?? (status === "maintenance" ? 0 : 12);
     const heartbeatArr = beats.slice(-24).map((b) => (b.status === 1 ? 1 : b.status === 3 ? 3 : 0));
     const info = monitorNames[id] || { name: `Service #${id}`, group: "Services" };
 
@@ -249,8 +268,25 @@ async function fetchKumaData(): Promise<TelemetryData> {
     return FALLBACK_TELEMETRY;
   }
 
-  const isMaintenance = activeMaintenances.length > 0 || parsedServices.some(s => s.status === "maintenance");
-  const isAllUp = parsedServices.length > 0 && parsedServices.every(s => s.status === "online");
+  // Include any services currently in maintenance in the activeMaintenances list
+  parsedServices.forEach((s) => {
+    if (s.status === "maintenance") {
+      const alreadyListed = activeMaintenances.some((m) =>
+        m.title.toLowerCase().includes(s.name.toLowerCase())
+      );
+      if (!alreadyListed) {
+        activeMaintenances.push({
+          id: Number(s.id) || Date.now(),
+          title: s.name,
+          description: "Karbantartás alatt / Maintenance in progress",
+          active: true
+        });
+      }
+    }
+  });
+
+  const isMaintenance = activeMaintenances.length > 0 || parsedServices.some((s) => s.status === "maintenance");
+  const isAllUp = parsedServices.length > 0 && parsedServices.every((s) => s.status === "online");
 
   return {
     overall: {
@@ -314,12 +350,18 @@ export function HomelabTelemetry({ dict }: { dict?: Record<string, unknown> }) {
   }, [isLive]);
 
   const renderStatusBadge = (status: "operational" | "maintenance" | "degraded" | "outage", live: boolean) => {
+    if (status === "maintenance") {
+      return (
+        <div className="flex items-center gap-2 text-xs font-mono text-blue-600 dark:text-blue-400">
+          <span className="inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+          Maintenance in Progress {!live && <span className="text-[10px] text-muted-foreground font-normal">(Snapshot)</span>}
+        </div>
+      );
+    }
     if (!live) {
       return (
         <div className="flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-400">
-          <span className="relative flex h-2 w-2">
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500/80"></span>
-          </span>
+          <span className="inline-flex rounded-full h-2 w-2 bg-emerald-500/80"></span>
           Operational <span className="text-[10px] text-muted-foreground font-normal">(Snapshot)</span>
         </div>
       );
@@ -332,19 +374,9 @@ export function HomelabTelemetry({ dict }: { dict?: Record<string, unknown> }) {
         </div>
       );
     }
-    if (status === "maintenance") {
-      return (
-        <div className="flex items-center gap-2 text-xs font-mono text-blue-600 dark:text-blue-400">
-          <span className="inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-          Maintenance in Progress
-        </div>
-      );
-    }
     return (
       <div className="flex items-center gap-2 text-xs font-mono text-amber-600 dark:text-amber-400">
-        <span className="relative flex h-2 w-2">
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-        </span>
+        <span className="inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
         Degraded Performance
       </div>
     );
