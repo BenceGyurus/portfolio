@@ -60,6 +60,7 @@
     "runningServices": "Running services",
     "focus": "Focus",
     "website": "Website",
+    "hobby": "Hobby Project",
     "project1": {
       "desc": "Template-based learning platform that generates tasks from a dataset to help students prepare for their literature matriculation exams efficiently.",
       "role": "Frontend Developer & System Admin",
@@ -74,6 +75,13 @@
       "focus1": "Infinite Problem Generation",
       "focus2": "Instant Evaluation",
       "focus3": "Step-by-step Solutions"
+    },
+    "project4": {
+      "title": "network-sandbox",
+      "desc": "A hobby OSPF network sandbox built with Docker and Terraform to simulate dynamic routing, convergence, and observe and analyze network traffic with packet captures.",
+      "focus1": "Dynamic OSPF routing simulation",
+      "focus2": "Traffic observation & packet inspection",
+      "focus3": "Automated containerized topology"
     },
     "homelabNodes": {
       "networking": "Networking & Proxy",

@@ -60,6 +60,7 @@
     "runningServices": "Futó szolgáltatások",
     "focus": "Fókusz",
     "website": "Weboldal",
+    "hobby": "Hobbi projekt",
     "project1": {
       "desc": "Sablon-alapú tanulási platform, amely egy adathalmazból generál feladatokat, hogy segítsen a diákoknak hatékonyan felkészülni az irodalom érettségire.",
       "role": "Frontend Fejlesztő & Üzemeltető",
@@ -74,6 +75,13 @@
       "focus1": "Végtelen feladatgenerálás",
       "focus2": "Azonnali értékelés",
       "focus3": "Lépésenkénti levezetések"
+    },
+    "project4": {
+      "title": "network-sandbox",
+      "desc": "Hobbiból épített OSPF hálózati tesztkörnyezet Docker és Terraform alapokon, a dinamikus útvonalválasztás, konvergencia és a hálózati csomagforgalom (packet capture) megfigyelésére és elemzésére.",
+      "focus1": "Dinamikus OSPF routing szimuláció",
+      "focus2": "Forgalomelemzés és csomagvizsgálat (Packet capture)",
+      "focus3": "Automatizált konténeres topológia"
     },
     "homelabNodes": {
       "networking": "Hálózat & Proxy",

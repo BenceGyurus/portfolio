@@ -58,7 +58,7 @@ export async function OpenSource({ dict }: { dict: any }) {
                 </div>
                 
                 <p className="text-sm text-muted-foreground mb-6 line-clamp-3 overflow-hidden">
-                  {repo.description || "No description provided."}
+                  {repo.description || (repo.name === "network-sandbox" ? "Docker and Terraform based OSPF network sandbox for traffic analysis." : "No description provided.")}
                 </p>
               </div>
               
