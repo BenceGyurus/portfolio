@@ -75,7 +75,7 @@ export function Projects({ dict }: { dict: any }) {
 
             <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.architecture}</div>
             <div className="md:col-span-3 flex flex-wrap gap-2">
-              {['Proxmox', 'Docker', 'Traefik', 'Grafana', 'Prometheus', 'Cloudflare', 'Tailscale'].map(tech => (
+              {['Proxmox', 'Docker', 'Ansible', 'Terraform', 'Traefik', 'Grafana', 'Prometheus', 'Cloudflare', 'Tailscale'].map(tech => (
                 <span key={tech} className="bg-secondary px-2 py-1 rounded-md text-sm">{tech}</span>
               ))}
             </div>

@@ -66,7 +66,7 @@
       "resps": ["Frontend development", "Physical infrastructure management"]
     },
     "project2": {
-      "desc": "Personal infrastructure built since 2023 for learning, experimenting, and hosting services reliably (started with TrueNAS, migrated to Proxmox in 2025)."
+      "desc": "Personal infrastructure built since 2023 for learning, experimenting, and hosting services reliably (started with TrueNAS, migrated to Proxmox in 2025, automated with Terraform and Ansible)."
     },
     "project3": {
       "title": "matekx.hu",
