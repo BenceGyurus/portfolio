@@ -76,7 +76,7 @@ export function Projects({ dict }: { dict: any }) {
 
             <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.architecture}</div>
             <div className="md:col-span-3 flex flex-wrap gap-2">
-              {['Proxmox', 'Kubernetes', 'Docker', 'Ansible', 'Terraform', 'Traefik', 'Grafana', 'Prometheus', 'Cloudflare', 'Tailscale'].map(tech => (
+              {['Proxmox', 'Kubernetes', 'FluxCD', 'Docker', 'Ansible', 'Terraform', 'Traefik', 'Grafana', 'Prometheus', 'Cloudflare', 'Tailscale'].map(tech => (
                 <span key={tech} className="bg-secondary px-2 py-1 rounded-md text-sm">{tech}</span>
               ))}
             </div>
@@ -89,6 +89,26 @@ export function Projects({ dict }: { dict: any }) {
               <p>• AdGuard Home</p>
               <p>• Authentik</p>
               <p>• Seafile</p>
+            </div>
+
+            <div className="md:col-span-1 text-sm font-mono text-muted-foreground">{dict.links}</div>
+            <div className="md:col-span-3 flex flex-wrap gap-4">
+              <Link
+                href="https://github.com/BenceGyurus/Homelab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-blue-500 transition-colors"
+              >
+                <GithubIcon className="w-4 h-4" /> {dict.project2.homelabRepo}
+              </Link>
+              <Link
+                href="https://github.com/BenceGyurus/talos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-blue-500 transition-colors"
+              >
+                <GithubIcon className="w-4 h-4" /> {dict.project2.talosRepo}
+              </Link>
             </div>
           </div>
         </div>
@@ -111,11 +131,14 @@ export function Projects({ dict }: { dict: any }) {
               {dict.project3.desc}
             </div>
 
-            <div className="text-sm font-mono text-muted-foreground">{dict.focus}</div>
+            <div className="text-sm font-mono text-muted-foreground">{dict.role}</div>
+            <div className="md:col-span-3">{dict.project3.role}</div>
+
+            <div className="text-sm font-mono text-muted-foreground">{dict.responsibilities}</div>
             <div className="md:col-span-3 space-y-1">
-              <p>• {dict.project3.focus1}</p>
-              <p>• {dict.project3.focus2}</p>
-              <p>• {dict.project3.focus3}</p>
+              {dict.project3.resps?.map((resp: string) => (
+                <p key={resp}>• {resp}</p>
+              ))}
             </div>
 
             <div className="text-sm font-mono text-muted-foreground">{dict.links}</div>

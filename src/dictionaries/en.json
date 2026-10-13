@@ -67,14 +67,19 @@
       "resps": ["Frontend development", "Physical infrastructure management"]
     },
     "project2": {
-      "desc": "Personal infrastructure built since 2023 for learning, experimenting, and hosting services reliably (started with TrueNAS, migrated to Proxmox and Kubernetes in 2025, automated with Terraform and Ansible)."
+      "desc": "Personal infrastructure built since 2023 for learning, experimenting, and hosting services reliably (started with TrueNAS, migrated to Proxmox and Kubernetes in 2025, automated with Terraform and Ansible, and GitOps-managed with FluxCD).",
+      "homelabRepo": "HomeLab repo",
+      "talosRepo": "Kubernetes & GitOps repo (FluxCD)"
     },
     "project3": {
       "title": "matekx.hu",
       "desc": "An interactive math practice platform providing topic-based problem sets, instant evaluation, and step-by-step solutions for high school admission and exam preparation.",
-      "focus1": "Infinite Problem Generation",
-      "focus2": "Instant Evaluation",
-      "focus3": "Step-by-step Solutions"
+      "role": "Frontend, Backend Developer & System Admin",
+      "resps": [
+        "Frontend development",
+        "Generator and backend development",
+        "Physical infrastructure management"
+      ]
     },
     "project4": {
       "title": "network-sandbox",

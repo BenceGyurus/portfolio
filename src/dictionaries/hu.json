@@ -18,7 +18,7 @@
     "nowReading": "Olvasom",
     "readingTitle": "Computer Networking A Top-Down Approach",
     "nowLearning": "Tanulom",
-    "learningTitle": "Go & Kubernetes",
+    "learningTitle": "Go és Kubernetes",
     "nowBuilding": "Építem",
     "buildingTitle": "matekx.hu"
   },
@@ -63,18 +63,23 @@
     "hobby": "Hobbi projekt",
     "project1": {
       "desc": "Sablon-alapú tanulási platform, amely egy adathalmazból generál feladatokat, hogy segítsen a diákoknak hatékonyan felkészülni az irodalom érettségire.",
-      "role": "Frontend Fejlesztő & Üzemeltető",
+      "role": "Frontend Fejlesztő és Üzemeltető",
       "resps": ["Frontend fejlesztés", "Fizikai infrastruktúra üzemeltetése"]
     },
     "project2": {
-      "desc": "2023 óta épülő saját infrastruktúra tanuláshoz, kísérletezéshez és szolgáltatások megbízható futtatásához (kezdetben TrueNAS, majd 2025-től Proxmox és Kubernetes alapokon, Terraform és Ansible automatizációval)."
+      "desc": "2023 óta épülő saját infrastruktúra tanuláshoz, kísérletezéshez és szolgáltatások megbízható futtatásához (kezdetben TrueNAS, majd 2025-től Proxmox és Kubernetes alapokon, Terraform és Ansible automatizációval, FluxCD GitOps vezérléssel).",
+      "homelabRepo": "HomeLab repó",
+      "talosRepo": "Kubernetes és GitOps repó (FluxCD)"
     },
     "project3": {
       "title": "matekx.hu",
       "desc": "Matematika gyakorló platform. Témakörönként folyamatosan megújuló feladatokat, azonnali javítást és lépésről lépésre lebontott magyarázatokat biztosít diákoknak a felvételihez és az érettségihez.",
-      "focus1": "Végtelen feladatgenerálás",
-      "focus2": "Azonnali értékelés",
-      "focus3": "Lépésenkénti levezetések"
+      "role": "Frontend, Backend Fejlesztő és Üzemeltető",
+      "resps": [
+        "Frontend fejlesztés",
+        "Generátor és backend fejlesztés",
+        "Fizikai infrastruktúra üzemeltetése"
+      ]
     },
     "project4": {
       "title": "network-sandbox",
@@ -84,7 +89,7 @@
       "focus3": "Automatizált konténeres topológia"
     },
     "homelabNodes": {
-      "networking": "Hálózat & Proxy",
+      "networking": "Hálózat és Proxy",
       "containers": "Konténer Hosztok",
       "kubernetes": "Kubernetes Cluster",
       "services": "Egyéb Szolgáltatások",
@@ -100,7 +105,7 @@
         "k8sWorker": { "id": "121", "name": "talos-worker", "desc": "Bare-metal K8s Worker Node" },
         "hass": { "id": "780", "name": "Home-Assistant", "desc": "Home Assistant OS" },
         "minecraft": { "id": "102", "name": "minecraft", "desc": "Crafty controller (MC szerverek)" },
-        "maildrop": { "id": "107", "name": "mail-drop-server", "desc": "Maildrop szolgáltatás & DDNS updater" }
+        "maildrop": { "id": "107", "name": "mail-drop-server", "desc": "Maildrop szolgáltatás és DDNS updater" }
       }
     }
   },
