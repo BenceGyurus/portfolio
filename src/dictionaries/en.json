@@ -133,7 +133,7 @@
     "tailscaleDesc": "Zero-trust Mesh VPN"
   },
   "openSource": {
-    "title": "Open Source",
+    "title": "Repositories",
     "noRepos": "// Could not load repositories at this time."
   },
   "techStack": {
