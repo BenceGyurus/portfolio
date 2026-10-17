@@ -9,7 +9,9 @@
     "educationLabel": "Education:",
     "education": "BME VIK",
     "focusLabel": "Current focus:",
-    "focuses": ["Infrastructure", "Networking", "Self Hosting", "Agentic systems", "Automation"]
+    "focuses": ["Infrastructure", "Networking", "Self Hosting", "Agentic systems", "Automation"],
+    "hobbyLabel": "Hobby:",
+    "hobbyValue": "Plane spotting & photography (repsit.gyurus.hu)"
   },
   "statusAndNow": {
     "statusLabel": "System Status",
@@ -87,6 +89,16 @@
       "focus1": "Dynamic OSPF routing simulation",
       "focus2": "Traffic observation & packet inspection",
       "focus3": "Automated containerized topology"
+    },
+    "project5": {
+      "title": "repsit.gyurus.hu — Plane Spotting",
+      "desc": "In my spare time, aviation and plane spotting photography is my personal passion. To organize and showcase my shots, I built the repsit.gyurus.hu gallery, where I collect and curate my captures of commercial and cargo aircraft at Budapest Airport and beyond.",
+      "hobbyTag": "Hobby Photography",
+      "focus1": "Plane spotting & aviation photography (Budapest Airport & beyond)",
+      "focus2": "Custom-built, minimalist and responsive photo gallery",
+      "focus3": "Optimized, multi-resolution WebP image delivery",
+      "galleryLink": "Open repsit.gyurus.hu gallery",
+      "previewNote": "Highlights from the collection: Airbus A320, Embraer E-Jet, Boeing 747-400F, Boeing 767"
     },
     "homelabNodes": {
       "networking": "Networking & Proxy",

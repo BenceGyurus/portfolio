@@ -9,7 +9,9 @@
     "educationLabel": "Tanulmányok:",
     "education": "BME VIK",
     "focusLabel": "Jelenlegi fókusz:",
-    "focuses": ["Infrastruktúra", "Hálózatok", "Saját szerver", "Agentic rendszerek", "Automatizáció"]
+    "focuses": ["Infrastruktúra", "Hálózatok", "Saját szerver", "Agentic rendszerek", "Automatizáció"],
+    "hobbyLabel": "Hobbi:",
+    "hobbyValue": "Repülőgép-fotózás (repsit.gyurus.hu)"
   },
   "statusAndNow": {
     "statusLabel": "Rendszer Állapot",
@@ -87,6 +89,16 @@
       "focus1": "Dinamikus OSPF routing szimuláció",
       "focus2": "Forgalomelemzés és csomagvizsgálat (Packet capture)",
       "focus3": "Automatizált konténeres topológia"
+    },
+    "project5": {
+      "title": "repsit.gyurus.hu — Repülőgép-fotózás",
+      "desc": "Szabadidőmben a légiközlekedés és a repülőgépek fotózása (plane spotting) a hobbim. A saját készítésű fotóim bemutatására és rendszerezésére hoztam létre a repsit.gyurus.hu galériát, ahol a Budapest Liszt Ferenc Nemzetközi Repülőtéren és egyéb helyszíneken lencsevégre kapott utasszállító és tehergépekről készült felvételeimet osztom meg.",
+      "hobbyTag": "Hobbi fotózás",
+      "focus1": "Plane spotting és aviatikai fotózás (Budapest Airport és egyéb helyszínek)",
+      "focus2": "Saját fejlesztésű, minimalista és reszponzív fotógaléria",
+      "focus3": "Optimalizált, többféle felbontású WebP képmegjelenítés",
+      "galleryLink": "repsit.gyurus.hu galéria megnyitása",
+      "previewNote": "Válogatás a gyűjteményből: Airbus A320, Embraer E-Jet, Boeing 747-400F, Boeing 767"
     },
     "homelabNodes": {
       "networking": "Hálózat és Proxy",
