@@ -10,8 +10,11 @@
     "education": "BME VIK",
     "focusLabel": "Jelenlegi fókusz:",
     "focuses": ["Infrastruktúra", "Hálózatok", "Saját szerver", "Agentic rendszerek", "Automatizáció"],
-    "hobbyLabel": "Hobbi:",
-    "hobbyValue": "Repülőgép-fotózás (repsit.gyurus.hu)"
+    "hobbyLabel": "Hobbik:",
+    "hobbies": [
+      { "text": "HomeLab és számítógépek" },
+      { "text": "Repülőgép-fotózás (repsit.gyurus.hu)", "link": "https://repsit.gyurus.hu" }
+    ]
   },
   "statusAndNow": {
     "statusLabel": "Rendszer Állapot",
@@ -92,7 +95,7 @@
     },
     "project5": {
       "title": "repsit.gyurus.hu — Repülőgép-fotózás",
-      "desc": "Régóta hobbim a repülők fotózása (plane spotting), leginkább Ferihegyen és környékén. A repsit.gyurus.hu-t azért csináltam, hogy egy saját, sallangmentes felületen gyűjtsem és mutassam meg a képeimet.",
+      "desc": "A számítógépek és a HomeLab mellett a repülők fotózása (plane spotting) a másik nagy hobbim, leginkább Ferihegyen és környékén. A repsit.gyurus.hu-t azért csináltam, hogy egy saját, sallangmentes felületen gyűjtsem és mutassam meg a képeimet.",
       "hobbyTag": "Hobbi fotózás",
       "focus1": "Közforgalmi és cargo gépek fotózása Ferihegyen",
       "focus2": "Saját készítésű, gyors és letisztult fotógaléria",
