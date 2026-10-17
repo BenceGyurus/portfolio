@@ -92,13 +92,13 @@
     },
     "project5": {
       "title": "repsit.gyurus.hu — Plane Spotting",
-      "desc": "In my spare time, aviation and plane spotting photography is my personal passion. To organize and showcase my shots, I built the repsit.gyurus.hu gallery, where I collect and curate my captures of commercial and cargo aircraft at Budapest Airport and beyond.",
-      "hobbyTag": "Hobby Photography",
-      "focus1": "Plane spotting & aviation photography (Budapest Airport & beyond)",
-      "focus2": "Custom-built, minimalist and responsive photo gallery",
-      "focus3": "Optimized, multi-resolution WebP image delivery",
-      "galleryLink": "Open repsit.gyurus.hu gallery",
-      "previewNote": "Highlights from the collection: Airbus A320, Embraer E-Jet, Boeing 747-400F, Boeing 767"
+      "desc": "I love photographing airplanes (plane spotting), mostly around Budapest Airport (Ferihegy). I built repsit.gyurus.hu as a lightweight, clean gallery to collect and share my favorite shots.",
+      "hobbyTag": "Hobby / Photography",
+      "focus1": "Commercial and cargo plane spotting (mostly at Ferihegy)",
+      "focus2": "Custom-built, clean and fast photo gallery",
+      "focus3": "High-res images with a smooth lightbox experience",
+      "galleryLink": "Open repsit.gyurus.hu",
+      "previewNote": "A few shots from the gallery: easyJet A320, Helvetic Embraer, Air Central 747F, SF Airlines 767"
     },
     "homelabNodes": {
       "networking": "Networking & Proxy",

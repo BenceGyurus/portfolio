@@ -92,13 +92,13 @@
     },
     "project5": {
       "title": "repsit.gyurus.hu — Repülőgép-fotózás",
-      "desc": "Szabadidőmben a légiközlekedés és a repülőgépek fotózása (plane spotting) a hobbim. A saját készítésű fotóim bemutatására és rendszerezésére hoztam létre a repsit.gyurus.hu galériát, ahol a Budapest Liszt Ferenc Nemzetközi Repülőtéren és egyéb helyszíneken lencsevégre kapott utasszállító és tehergépekről készült felvételeimet osztom meg.",
+      "desc": "Régóta hobbim a repülők fotózása (plane spotting), leginkább Ferihegyen és környékén. A repsit.gyurus.hu-t azért csináltam, hogy egy saját, sallangmentes felületen gyűjtsem és mutassam meg a képeimet.",
       "hobbyTag": "Hobbi fotózás",
-      "focus1": "Plane spotting és aviatikai fotózás (Budapest Airport és egyéb helyszínek)",
-      "focus2": "Saját fejlesztésű, minimalista és reszponzív fotógaléria",
-      "focus3": "Optimalizált, többféle felbontású WebP képmegjelenítés",
-      "galleryLink": "repsit.gyurus.hu galéria megnyitása",
-      "previewNote": "Válogatás a gyűjteményből: Airbus A320, Embraer E-Jet, Boeing 747-400F, Boeing 767"
+      "focus1": "Közforgalmi és cargo gépek fotózása Ferihegyen",
+      "focus2": "Saját készítésű, gyors és letisztult fotógaléria",
+      "focus3": "Nagyfelbontású képek és kényelmes lightbox nézegető",
+      "galleryLink": "repsit.gyurus.hu megnyitása",
+      "previewNote": "Pár kép a galériából: easyJet A320, Helvetic Embraer, Air Central 747F, SF Airlines 767"
     },
     "homelabNodes": {
       "networking": "Hálózat és Proxy",
