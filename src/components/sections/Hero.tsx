@@ -65,39 +65,6 @@ export function Hero({ dict }: { dict: any }) {
               </span>
             ))}
           </div>
-          {dict.hobbyLabel && (
-            <div>
-              <span className="text-blue-400">{dict.hobbyLabel}</span><br />
-              {dict.hobbies ? (
-                dict.hobbies.map((h: any, idx: number) => (
-                  <span key={idx}>
-                    {h.link ? (
-                      <Link
-                        href={h.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-blue-400 transition-colors underline decoration-dotted underline-offset-2"
-                      >
-                        {h.text}
-                      </Link>
-                    ) : (
-                      h.text
-                    )}
-                    {idx < dict.hobbies.length - 1 && <br />}
-                  </span>
-                ))
-              ) : (
-                <Link
-                  href="https://repsit.gyurus.hu"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-400 transition-colors underline decoration-dotted underline-offset-2"
-                >
-                  {dict.hobbyValue}
-                </Link>
-              )}
-            </div>
-          )}
         </div>
       </div>
     </section>

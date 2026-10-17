@@ -9,12 +9,7 @@
     "educationLabel": "Education:",
     "education": "BME VIK",
     "focusLabel": "Current focus:",
-    "focuses": ["Infrastructure", "Networking", "Self Hosting", "Agentic systems", "Automation"],
-    "hobbyLabel": "Hobbies:",
-    "hobbies": [
-      { "text": "HomeLab & computers" },
-      { "text": "Plane spotting & photography (repsit.gyurus.hu)", "link": "https://repsit.gyurus.hu" }
-    ]
+    "focuses": ["Infrastructure", "Networking", "Self Hosting", "Agentic systems", "Automation"]
   },
   "statusAndNow": {
     "statusLabel": "System Status",
@@ -95,7 +90,7 @@
     },
     "project5": {
       "title": "repsit.gyurus.hu — Plane Spotting",
-      "desc": "Alongside computing and my HomeLab, I started photographing airplanes (plane spotting) about 2 years ago, mostly around Budapest Airport (Ferihegy). I built repsit.gyurus.hu as a lightweight, clean gallery to collect and share my favorite shots.",
+      "desc": "I've been photographing airplanes (plane spotting) for about 2 years, mostly around Budapest Airport (Ferihegy). repsit.gyurus.hu is my personal gallery where I collect and share my shots.",
       "hobbyTag": "Hobby / Photography",
       "focus1": "Commercial and cargo plane spotting (mostly at Ferihegy)",
       "focus2": "Custom-built, clean and fast photo gallery",
